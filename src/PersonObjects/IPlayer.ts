@@ -230,6 +230,7 @@ export interface IPlayer {
     money: number,
     time: number,
     singParams: any,
+    focus: boolean,
   ): void;
   startFactionFieldWork(faction: Faction): void;
   startFactionHackWork(faction: Faction): void;

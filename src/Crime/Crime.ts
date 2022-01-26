@@ -87,7 +87,7 @@ export class Crime {
     this.kills = params.kills ? params.kills : 0;
   }
 
-  commit(router: IRouter, p: IPlayer, div = 1, workerScript: WorkerScript | null = null): number {
+  commit(router: IRouter, p: IPlayer, div = 1, workerScript: WorkerScript | null = null, focus = true): number {
     if (div <= 0) {
       div = 1;
     }
@@ -103,6 +103,7 @@ export class Crime {
       this.money / div,
       this.time,
       workerScript,
+      focus,
     );
 
     return this.time;

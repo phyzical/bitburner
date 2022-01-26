@@ -1439,6 +1439,7 @@ export function startCrime(
   money: number,
   time: number,
   workerscript: WorkerScript | null = null,
+  focus: boolean
 ): void {
   this.crimeType = crimeType;
 
@@ -1461,7 +1462,11 @@ export function startCrime(
   this.workMoneyGained = money * this.crime_money_mult * BitNodeMultipliers.CrimeMoney;
 
   this.timeNeededToCompleteWork = time;
-  router.toWork();
+  if (focus) {
+    router.toWork();
+  } else {
+
+  }
 }
 
 export function commitCrime(this: IPlayer, numCycles: number): boolean {
@@ -1511,20 +1516,20 @@ export function finishCrime(this: IPlayer, cancelled: boolean): string {
         if (ws.disableLogs.ALL == null && ws.disableLogs.commitCrime == null) {
           ws.scriptRef.log(
             "SUCCESS: Crime successful! Gained " +
-              numeralWrapper.formatMoney(this.workMoneyGained) +
-              ", " +
-              numeralWrapper.formatExp(this.workHackExpGained) +
-              " hack exp, " +
-              numeralWrapper.formatExp(this.workStrExpGained) +
-              " str exp, " +
-              numeralWrapper.formatExp(this.workDefExpGained) +
-              " def exp, " +
-              numeralWrapper.formatExp(this.workDexExpGained) +
-              " dex exp, " +
-              numeralWrapper.formatExp(this.workAgiExpGained) +
-              " agi exp, " +
-              numeralWrapper.formatExp(this.workChaExpGained) +
-              " cha exp.",
+            numeralWrapper.formatMoney(this.workMoneyGained) +
+            ", " +
+            numeralWrapper.formatExp(this.workHackExpGained) +
+            " hack exp, " +
+            numeralWrapper.formatExp(this.workStrExpGained) +
+            " str exp, " +
+            numeralWrapper.formatExp(this.workDefExpGained) +
+            " def exp, " +
+            numeralWrapper.formatExp(this.workDexExpGained) +
+            " dex exp, " +
+            numeralWrapper.formatExp(this.workAgiExpGained) +
+            " agi exp, " +
+            numeralWrapper.formatExp(this.workChaExpGained) +
+            " cha exp.",
           );
         }
       } else {
@@ -1563,18 +1568,18 @@ export function finishCrime(this: IPlayer, cancelled: boolean): string {
         if (ws.disableLogs.ALL == null && ws.disableLogs.commitCrime == null) {
           ws.scriptRef.log(
             "FAIL: Crime failed! Gained " +
-              numeralWrapper.formatExp(this.workHackExpGained) +
-              " hack exp, " +
-              numeralWrapper.formatExp(this.workStrExpGained) +
-              " str exp, " +
-              numeralWrapper.formatExp(this.workDefExpGained) +
-              " def exp, " +
-              numeralWrapper.formatExp(this.workDexExpGained) +
-              " dex exp, " +
-              numeralWrapper.formatExp(this.workAgiExpGained) +
-              " agi exp, " +
-              numeralWrapper.formatExp(this.workChaExpGained) +
-              " cha exp.",
+            numeralWrapper.formatExp(this.workHackExpGained) +
+            " hack exp, " +
+            numeralWrapper.formatExp(this.workStrExpGained) +
+            " str exp, " +
+            numeralWrapper.formatExp(this.workDefExpGained) +
+            " def exp, " +
+            numeralWrapper.formatExp(this.workDexExpGained) +
+            " dex exp, " +
+            numeralWrapper.formatExp(this.workAgiExpGained) +
+            " agi exp, " +
+            numeralWrapper.formatExp(this.workChaExpGained) +
+            " cha exp.",
           );
         }
       } else {
