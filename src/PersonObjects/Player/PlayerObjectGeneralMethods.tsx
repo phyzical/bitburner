@@ -1439,7 +1439,6 @@ export function startCrime(
   money: number,
   time: number,
   workerscript: WorkerScript | null = null,
-  focus: boolean
 ): void {
   this.crimeType = crimeType;
 
@@ -1462,11 +1461,7 @@ export function startCrime(
   this.workMoneyGained = money * this.crime_money_mult * BitNodeMultipliers.CrimeMoney;
 
   this.timeNeededToCompleteWork = time;
-  if (focus) {
-    router.toWork();
-  } else {
-
-  }
+  router.toWork();
 }
 
 export function commitCrime(this: IPlayer, numCycles: number): boolean {

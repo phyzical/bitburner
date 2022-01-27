@@ -103,7 +103,6 @@ export class Crime {
       this.money / div,
       this.time,
       workerScript,
-      focus,
     );
 
     return this.time;
