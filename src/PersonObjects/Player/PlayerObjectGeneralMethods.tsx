@@ -65,6 +65,7 @@ import { serverMetadata } from "../../Server/data/servers";
 import { SnackbarEvents } from "../../ui/React/Snackbar";
 import { calculateClassEarnings } from "../formulas/work";
 import { achievements } from "../../Achievements/Achievements";
+import { getCurrentCompanyPositionHelper } from "../../Company/GetCurrentCompanyPosition";
 
 export function init(this: IPlayer): void {
   /* Initialize Player's home computer */
@@ -1511,20 +1512,20 @@ export function finishCrime(this: IPlayer, cancelled: boolean): string {
         if (ws.disableLogs.ALL == null && ws.disableLogs.commitCrime == null) {
           ws.scriptRef.log(
             "SUCCESS: Crime successful! Gained " +
-              numeralWrapper.formatMoney(this.workMoneyGained) +
-              ", " +
-              numeralWrapper.formatExp(this.workHackExpGained) +
-              " hack exp, " +
-              numeralWrapper.formatExp(this.workStrExpGained) +
-              " str exp, " +
-              numeralWrapper.formatExp(this.workDefExpGained) +
-              " def exp, " +
-              numeralWrapper.formatExp(this.workDexExpGained) +
-              " dex exp, " +
-              numeralWrapper.formatExp(this.workAgiExpGained) +
-              " agi exp, " +
-              numeralWrapper.formatExp(this.workChaExpGained) +
-              " cha exp.",
+            numeralWrapper.formatMoney(this.workMoneyGained) +
+            ", " +
+            numeralWrapper.formatExp(this.workHackExpGained) +
+            " hack exp, " +
+            numeralWrapper.formatExp(this.workStrExpGained) +
+            " str exp, " +
+            numeralWrapper.formatExp(this.workDefExpGained) +
+            " def exp, " +
+            numeralWrapper.formatExp(this.workDexExpGained) +
+            " dex exp, " +
+            numeralWrapper.formatExp(this.workAgiExpGained) +
+            " agi exp, " +
+            numeralWrapper.formatExp(this.workChaExpGained) +
+            " cha exp.",
           );
         }
       } else {
@@ -1563,18 +1564,18 @@ export function finishCrime(this: IPlayer, cancelled: boolean): string {
         if (ws.disableLogs.ALL == null && ws.disableLogs.commitCrime == null) {
           ws.scriptRef.log(
             "FAIL: Crime failed! Gained " +
-              numeralWrapper.formatExp(this.workHackExpGained) +
-              " hack exp, " +
-              numeralWrapper.formatExp(this.workStrExpGained) +
-              " str exp, " +
-              numeralWrapper.formatExp(this.workDefExpGained) +
-              " def exp, " +
-              numeralWrapper.formatExp(this.workDexExpGained) +
-              " dex exp, " +
-              numeralWrapper.formatExp(this.workAgiExpGained) +
-              " agi exp, " +
-              numeralWrapper.formatExp(this.workChaExpGained) +
-              " cha exp.",
+            numeralWrapper.formatExp(this.workHackExpGained) +
+            " hack exp, " +
+            numeralWrapper.formatExp(this.workStrExpGained) +
+            " str exp, " +
+            numeralWrapper.formatExp(this.workDefExpGained) +
+            " def exp, " +
+            numeralWrapper.formatExp(this.workDexExpGained) +
+            " dex exp, " +
+            numeralWrapper.formatExp(this.workAgiExpGained) +
+            " agi exp, " +
+            numeralWrapper.formatExp(this.workChaExpGained) +
+            " cha exp.",
           );
         }
       } else {
@@ -1718,23 +1719,7 @@ export function applyForJob(this: IPlayer, entryPosType: CompanyPosition, sing =
     return false;
   }
 
-  while (true) {
-    const newPos = getNextCompanyPositionHelper(pos);
-    if (newPos == null) {
-      break;
-    }
-
-    //Check if this company has this position
-    if (company.hasPosition(newPos)) {
-      if (!this.isQualified(company, newPos)) {
-        //If player not qualified for next job, break loop so player will be given current job
-        break;
-      }
-      pos = newPos;
-    } else {
-      break;
-    }
-  }
+  pos = getCurrentCompanyPositionHelper(this, company, pos)
 
   //Check if the determined job is the same as the player's current job
   if (currCompany != null) {
@@ -1757,7 +1742,6 @@ export function applyForJob(this: IPlayer, entryPosType: CompanyPosition, sing =
         }
         return false;
       }
-      return false; //Same job, do nothing
     }
   }
 
@@ -2609,7 +2593,6 @@ export function gainCodingContractReward(this: IPlayer, reward: ICodingContractR
         Factions[facName].playerReputation += gainPerFaction;
       }
       return `Gained ${gainPerFaction} reputation for each of the following factions: ${factions.toString()}`;
-      break;
     case CodingContractRewardType.CompanyReputation: {
       if (reward.name == null || !(Companies[reward.name] instanceof Company)) {
         //If no/invalid company was designated, just give rewards to all factions

@@ -10,6 +10,8 @@ import { getJobRequirementText } from "../../Company/GetJobRequirementText";
 import { use } from "../../ui/Context";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
+import { getNextCompanyPositionHelper } from "../../Company/GetNextCompanyPosition";
+import { getCurrentCompanyPositionHelper } from "../../Company/GetCurrentCompanyPosition";
 
 type IProps = {
   company: Company;
@@ -22,7 +24,9 @@ export function ApplyToJobButton(props: IProps): React.ReactElement {
   const player = use.Player();
 
   function getJobRequirementTooltip(): string {
-    const pos = player.getNextCompanyPosition(props.company, props.entryPosType);
+    const pos = getNextCompanyPositionHelper(
+      getCurrentCompanyPositionHelper(player, props.company, props.entryPosType)
+    );
     if (pos == null) {
       return "";
     }
