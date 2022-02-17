@@ -195,6 +195,7 @@ export interface IPlayer {
   getGangFaction(): Faction;
   getGangName(): string;
   getHomeComputer(): Server;
+  getCurrentCompanyPosition(company: Company): CompanyPosition;
   getNextCompanyPosition(company: Company, entryPosType: CompanyPosition): CompanyPosition | null;
   getUpgradeHomeRamCost(): number;
   getUpgradeHomeCoresCost(): number;

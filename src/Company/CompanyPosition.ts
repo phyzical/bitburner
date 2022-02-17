@@ -113,11 +113,11 @@ export class CompanyPosition {
     if (
       Math.round(
         this.hackingEffectiveness +
-          this.strengthEffectiveness +
-          this.defenseEffectiveness +
-          this.dexterityEffectiveness +
-          this.agilityEffectiveness +
-          this.charismaEffectiveness,
+        this.strengthEffectiveness +
+        this.defenseEffectiveness +
+        this.dexterityEffectiveness +
+        this.agilityEffectiveness +
+        this.charismaEffectiveness,
       ) !== 100
     ) {
       console.error(`CompanyPosition ${this.name} parameters do not sum to 100`);
@@ -147,6 +147,32 @@ export class CompanyPosition {
     }
 
     return reputationGain;
+  }
+
+  getPositionType(): string {
+    if (this.isSoftwareJob()) {
+      return "Software"
+    } else if (this.isITJob()) {
+      return "IT"
+    } else if (this.isSecurityEngineerJob()) {
+      return "Security Engineer"
+    } else if (this.isNetworkEngineerJob()) {
+      return "Network Engineer"
+    } else if (this.isBusinessJob()) {
+      return "Business"
+    } else if (this.isSecurityJob()) {
+      return "Security"
+    } else if (this.isAgentJob()) {
+      return "Agent"
+    } else if (this.isSoftwareConsultantJob()) {
+      return "Software Consultant"
+    } else if (this.isBusinessConsultantJob()) {
+      return "Business Consultant"
+    } else if (this.isPartTimeJob()) {
+      return "Part Time"
+    } else {
+      return "No Job"
+    }
   }
 
   isSoftwareJob(): boolean {

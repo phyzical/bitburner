@@ -11,7 +11,6 @@ import { use } from "../../ui/Context";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import { getNextCompanyPositionHelper } from "../../Company/GetNextCompanyPosition";
-import { getCurrentCompanyPositionHelper } from "../../Company/GetCurrentCompanyPosition";
 
 type IProps = {
   company: Company;
@@ -20,28 +19,26 @@ type IProps = {
   text: string;
 };
 
-export function ApplyToJobButton(props: IProps): React.ReactElement {
+export function ApplyToJobButton({ company, entryPosType, onClick, text }: IProps): React.ReactElement {
   const player = use.Player();
+  const currentPosition = player.getCurrentCompanyPosition(company)
+  const [tooltipText, setTooltipText] = React.useState("")
 
-  function getJobRequirementTooltip(): string {
-    const pos = getNextCompanyPositionHelper(
-      getCurrentCompanyPositionHelper(player, props.company, props.entryPosType)
-    );
+  React.useEffect(() => {
+    const pos = getNextCompanyPositionHelper(currentPosition)
     if (pos == null) {
-      return "";
+      setTooltipText(`You are already at the highest position for ${entryPosType.getPositionType()}! No promotion available`);
+    } else if (!company.hasPosition(pos)) {
+      setTooltipText(`${pos.name} is not available for ${company.name}`);
+    } else {
+      setTooltipText(getJobRequirementText(company, pos, true));
     }
-
-    if (!props.company.hasPosition(pos)) {
-      return "";
-    }
-
-    return getJobRequirementText(props.company, pos, true);
-  }
+  }, [currentPosition])
 
   return (
     <>
-      <Tooltip title={<span dangerouslySetInnerHTML={{ __html: getJobRequirementTooltip() }}></span>}>
-        <Button onClick={props.onClick}>{props.text}</Button>
+      <Tooltip title={<span dangerouslySetInnerHTML={{ __html: tooltipText }}></span>}>
+        <Button onClick={onClick}>{text}</Button>
       </Tooltip>
     </>
   );

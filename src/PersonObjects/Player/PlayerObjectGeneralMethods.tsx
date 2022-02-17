@@ -65,7 +65,6 @@ import { serverMetadata } from "../../Server/data/servers";
 import { SnackbarEvents } from "../../ui/React/Snackbar";
 import { calculateClassEarnings } from "../formulas/work";
 import { achievements } from "../../Achievements/Achievements";
-import { getCurrentCompanyPositionHelper } from "../../Company/GetCurrentCompanyPosition";
 
 export function init(this: IPlayer): void {
   /* Initialize Player's home computer */
@@ -1719,7 +1718,7 @@ export function applyForJob(this: IPlayer, entryPosType: CompanyPosition, sing =
     return false;
   }
 
-  pos = getCurrentCompanyPositionHelper(this, company, pos)
+  pos = this.getCurrentCompanyPosition(company, pos)
 
   //Check if the determined job is the same as the player's current job
   if (currCompany != null) {
@@ -1754,6 +1753,32 @@ export function applyForJob(this: IPlayer, entryPosType: CompanyPosition, sing =
   }
   return true;
 }
+
+//Returns your current position at a company given the field (software, business, etc.)
+export function getCurrentCompanyPosition(
+  this: IPlayer,
+  company: Company,
+  pos: CompanyPosition,
+): CompanyPosition {
+  while (true) {
+    const newPos = getNextCompanyPositionHelper(pos);
+    if (newPos == null) {
+      return pos;
+    }
+
+    //Check if this company has this position
+    if (company.hasPosition(newPos)) {
+      if (!this.isQualified(company, newPos)) {
+        //If player not qualified for next job, break loop so player will be given current job
+        return pos;
+      }
+      pos = newPos;
+    } else {
+      return pos;
+    }
+  }
+}
+
 
 //Returns your next position at a company given the field (software, business, etc.)
 export function getNextCompanyPosition(

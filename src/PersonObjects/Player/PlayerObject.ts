@@ -204,6 +204,7 @@ export class PlayerObject implements IPlayer {
   getGangFaction: () => Faction;
   getGangName: () => string;
   getHomeComputer: () => Server;
+  getCurrentCompanyPosition: (company: Company) => CompanyPosition;
   getNextCompanyPosition: (company: Company, entryPosType: CompanyPosition) => CompanyPosition | null;
   getUpgradeHomeRamCost: () => number;
   getUpgradeHomeCoresCost: () => number;
@@ -483,11 +484,11 @@ export class PlayerObject implements IPlayer {
     // Let's get a hash of some semi-random stuff so we have something unique.
     this.identifier = cyrb53(
       "I-" +
-        new Date().getTime() +
-        navigator.userAgent +
-        window.innerWidth +
-        window.innerHeight +
-        getRandomInt(100, 999),
+      new Date().getTime() +
+      navigator.userAgent +
+      window.innerWidth +
+      window.innerHeight +
+      getRandomInt(100, 999),
     );
 
     this.init = generalMethods.init;
@@ -552,6 +553,7 @@ export class PlayerObject implements IPlayer {
     this.regenerateHp = generalMethods.regenerateHp;
     this.hospitalize = generalMethods.hospitalize;
     this.applyForJob = generalMethods.applyForJob;
+    this.getCurrentCompanyPosition = generalMethods.getCurrentCompanyPosition;
     this.getNextCompanyPosition = generalMethods.getNextCompanyPosition;
     this.quitJob = generalMethods.quitJob;
     this.hasJob = generalMethods.hasJob;
