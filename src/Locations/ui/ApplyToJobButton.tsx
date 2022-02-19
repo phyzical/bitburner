@@ -24,14 +24,12 @@ export function ApplyToJobButton(props: IProps): React.ReactElement {
   function getJobRequirementTooltip(): string {
     const pos = player.getNextCompanyPosition(props.company, props.entryPosType);
     if (pos == null) {
-      return "";
+      return `You are already at the highest position for ${props.entryPosType.getPositionType()}! No promotion available`;
+    } else if (!props.company.hasPosition(pos)) {
+      return `${pos.name} is not available for ${props.company.name}`;
+    } else {
+      return getJobRequirementText(props.company, pos, true);
     }
-
-    if (!props.company.hasPosition(pos)) {
-      return "";
-    }
-
-    return getJobRequirementText(props.company, pos, true);
   }
 
   return (
