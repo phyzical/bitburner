@@ -17,6 +17,7 @@ import { clearObject } from "../utils/helpers/clearObject";
 import { WHRNG } from "../Casino/RNG";
 
 import React from "react";
+import { FactionNames } from "../Faction/data/FactionNames";
 
 function AddToAugmentations(aug: Augmentation): void {
   const name = aug.name;
@@ -137,7 +138,9 @@ function initAugmentations(): void {
   );
   const UnstableCircadianModulator = new Augmentation(UnstableCircadianModulatorParams);
 
-  UnstableCircadianModulator.addToFactions(["Speakers for the Dead"]);
+  UnstableCircadianModulator.addToFactions([
+    FactionNames.SpeakersForTheDead,
+  ]);
   if (augmentationExists(AugmentationNames.UnstableCircadianModulator)) {
     delete Augmentations[AugmentationNames.UnstableCircadianModulator];
   }
@@ -154,7 +157,11 @@ function initAugmentations(): void {
     agility_mult: 1.08,
     dexterity_mult: 1.08,
   });
-  HemoRecirculator.addToFactions(["Tetrads", "The Dark Army", "The Syndicate"]);
+  HemoRecirculator.addToFactions([
+    FactionNames.Tetrads,
+    FactionNames.TheDarkArmy,
+    FactionNames.TheSyndicate,
+  ]);
   if (augmentationExists(AugmentationNames.HemoRecirculator)) {
     delete Augmentations[AugmentationNames.HemoRecirculator];
   }
@@ -170,14 +177,14 @@ function initAugmentations(): void {
     dexterity_mult: 1.1,
   });
   Targeting1.addToFactions([
-    "Slum Snakes",
-    "The Dark Army",
-    "The Syndicate",
-    "Sector-12",
-    "Ishima",
-    "OmniTek Incorporated",
-    "KuaiGong International",
-    "Blade Industries",
+    FactionNames.SlumSnakes,
+    FactionNames.TheDarkArmy,
+    FactionNames.TheSyndicate,
+    FactionNames.Sector12,
+    FactionNames.Ishima,
+    FactionNames.OmniTekIncorporated,
+    FactionNames.KuaiGongInternational,
+    FactionNames.BladeIndustries,
   ]);
   if (augmentationExists(AugmentationNames.Targeting1)) {
     delete Augmentations[AugmentationNames.Targeting1];
@@ -195,12 +202,12 @@ function initAugmentations(): void {
     dexterity_mult: 1.2,
   });
   Targeting2.addToFactions([
-    "The Dark Army",
-    "The Syndicate",
-    "Sector-12",
-    "OmniTek Incorporated",
-    "KuaiGong International",
-    "Blade Industries",
+    FactionNames.TheDarkArmy,
+    FactionNames.TheSyndicate,
+    FactionNames.Sector12,
+    FactionNames.OmniTekIncorporated,
+    FactionNames.KuaiGongInternational,
+    FactionNames.BladeIndustries,
   ]);
   if (augmentationExists(AugmentationNames.Targeting2)) {
     delete Augmentations[AugmentationNames.Targeting2];
@@ -216,12 +223,12 @@ function initAugmentations(): void {
     dexterity_mult: 1.3,
   });
   Targeting3.addToFactions([
-    "The Dark Army",
-    "The Syndicate",
-    "OmniTek Incorporated",
-    "KuaiGong International",
-    "Blade Industries",
-    "The Covenant",
+    FactionNames.TheDarkArmy,
+    FactionNames.TheSyndicate,
+    FactionNames.OmniTekIncorporated,
+    FactionNames.KuaiGongInternational,
+    FactionNames.BladeIndustries,
+    FactionNames.TheCovenant,
   ]);
   if (augmentationExists(AugmentationNames.Targeting3)) {
     delete Augmentations[AugmentationNames.Targeting3];
@@ -239,13 +246,13 @@ function initAugmentations(): void {
     strength_mult: 1.5,
   });
   SyntheticHeart.addToFactions([
-    "KuaiGong International",
-    "Fulcrum Secret Technologies",
-    "Speakers for the Dead",
-    "NWO",
-    "The Covenant",
-    "Daedalus",
-    "Illuminati",
+    FactionNames.KuaiGongInternational,
+    FactionNames.FulcrumSecretTechnologies,
+    FactionNames.SpeakersForTheDead,
+    FactionNames.NWO,
+    FactionNames.TheCovenant,
+    FactionNames.Daedalus,
+    FactionNames.Illuminati,
   ]);
   if (augmentationExists(AugmentationNames.SyntheticHeart)) {
     delete Augmentations[AugmentationNames.SyntheticHeart];
@@ -264,14 +271,14 @@ function initAugmentations(): void {
     defense_mult: 1.3,
   });
   SynfibrilMuscle.addToFactions([
-    "KuaiGong International",
-    "Fulcrum Secret Technologies",
-    "Speakers for the Dead",
-    "NWO",
-    "The Covenant",
-    "Daedalus",
-    "Illuminati",
-    "Blade Industries",
+    FactionNames.KuaiGongInternational,
+    FactionNames.FulcrumSecretTechnologies,
+    FactionNames.SpeakersForTheDead,
+    FactionNames.NWO,
+    FactionNames.TheCovenant,
+    FactionNames.Daedalus,
+    FactionNames.Illuminati,
+    FactionNames.BladeIndustries,
   ]);
   if (augmentationExists(AugmentationNames.SynfibrilMuscle)) {
     delete Augmentations[AugmentationNames.SynfibrilMuscle];
@@ -289,14 +296,14 @@ function initAugmentations(): void {
     defense_mult: 1.1,
   });
   CombatRib1.addToFactions([
-    "Slum Snakes",
-    "The Dark Army",
-    "The Syndicate",
-    "Volhaven",
-    "Ishima",
-    "OmniTek Incorporated",
-    "KuaiGong International",
-    "Blade Industries",
+    FactionNames.SlumSnakes,
+    FactionNames.TheDarkArmy,
+    FactionNames.TheSyndicate,
+    FactionNames.Volhaven,
+    FactionNames.Ishima,
+    FactionNames.OmniTekIncorporated,
+    FactionNames.KuaiGongInternational,
+    FactionNames.BladeIndustries,
   ]);
   if (augmentationExists(AugmentationNames.CombatRib1)) {
     delete Augmentations[AugmentationNames.CombatRib1];
@@ -315,12 +322,12 @@ function initAugmentations(): void {
     defense_mult: 1.14,
   });
   CombatRib2.addToFactions([
-    "The Dark Army",
-    "The Syndicate",
-    "Volhaven",
-    "OmniTek Incorporated",
-    "KuaiGong International",
-    "Blade Industries",
+    FactionNames.TheDarkArmy,
+    FactionNames.TheSyndicate,
+    FactionNames.Volhaven,
+    FactionNames.OmniTekIncorporated,
+    FactionNames.KuaiGongInternational,
+    FactionNames.BladeIndustries,
   ]);
   if (augmentationExists(AugmentationNames.CombatRib2)) {
     delete Augmentations[AugmentationNames.CombatRib2];
@@ -339,12 +346,12 @@ function initAugmentations(): void {
     defense_mult: 1.18,
   });
   CombatRib3.addToFactions([
-    "The Dark Army",
-    "The Syndicate",
-    "OmniTek Incorporated",
-    "KuaiGong International",
-    "Blade Industries",
-    "The Covenant",
+    FactionNames.TheDarkArmy,
+    FactionNames.TheSyndicate,
+    FactionNames.OmniTekIncorporated,
+    FactionNames.KuaiGongInternational,
+    FactionNames.BladeIndustries,
+    FactionNames.TheCovenant,
   ]);
   if (augmentationExists(AugmentationNames.CombatRib3)) {
     delete Augmentations[AugmentationNames.CombatRib3];
@@ -362,13 +369,13 @@ function initAugmentations(): void {
     defense_mult: 1.2,
   });
   NanofiberWeave.addToFactions([
-    "Tian Di Hui",
-    "The Syndicate",
-    "The Dark Army",
-    "Speakers for the Dead",
-    "Blade Industries",
-    "Fulcrum Secret Technologies",
-    "OmniTek Incorporated",
+    FactionNames.TheDarkArmy,
+    FactionNames.TheSyndicate,
+    FactionNames.OmniTekIncorporated,
+    FactionNames.BladeIndustries,
+    FactionNames.TianDiHui,
+    FactionNames.SpeakersForTheDead,
+    FactionNames.FulcrumSecretTechnologies,
   ]);
   if (augmentationExists(AugmentationNames.NanofiberWeave)) {
     delete Augmentations[AugmentationNames.NanofiberWeave];
@@ -388,11 +395,11 @@ function initAugmentations(): void {
     defense_mult: 2.2,
   });
   SubdermalArmor.addToFactions([
-    "The Syndicate",
-    "Fulcrum Secret Technologies",
-    "Illuminati",
-    "Daedalus",
-    "The Covenant",
+    FactionNames.TheSyndicate,
+    FactionNames.FulcrumSecretTechnologies,
+    FactionNames.Illuminati,
+    FactionNames.Daedalus,
+    FactionNames.TheCovenant,
   ]);
   if (augmentationExists(AugmentationNames.SubdermalArmor)) {
     delete Augmentations[AugmentationNames.SubdermalArmor];
@@ -410,15 +417,15 @@ function initAugmentations(): void {
     dexterity_mult: 1.05,
   });
   WiredReflexes.addToFactions([
-    "Tian Di Hui",
-    "Slum Snakes",
-    "Sector-12",
-    "Volhaven",
-    "Aevum",
-    "Ishima",
-    "The Syndicate",
-    "The Dark Army",
-    "Speakers for the Dead",
+    FactionNames.TianDiHui,
+    FactionNames.SlumSnakes,
+    FactionNames.Sector12,
+    FactionNames.Volhaven,
+    FactionNames.Aevum,
+    FactionNames.Ishima,
+    FactionNames.TheSyndicate,
+    FactionNames.TheDarkArmy,
+    FactionNames.SpeakersForTheDead,
   ]);
   if (augmentationExists(AugmentationNames.WiredReflexes)) {
     delete Augmentations[AugmentationNames.WiredReflexes];
@@ -434,7 +441,7 @@ function initAugmentations(): void {
     strength_mult: 1.7,
     defense_mult: 1.7,
   });
-  GrapheneBoneLacings.addToFactions(["Fulcrum Secret Technologies", "The Covenant"]);
+  GrapheneBoneLacings.addToFactions([FactionNames.FulcrumSecretTechnologies, FactionNames.TheCovenant]);
   if (augmentationExists(AugmentationNames.GrapheneBoneLacings)) {
     delete Augmentations[AugmentationNames.GrapheneBoneLacings];
   }
@@ -455,11 +462,11 @@ function initAugmentations(): void {
     dexterity_mult: 1.15,
   });
   BionicSpine.addToFactions([
-    "Speakers for the Dead",
-    "The Syndicate",
-    "KuaiGong International",
-    "OmniTek Incorporated",
-    "Blade Industries",
+    FactionNames.SpeakersForTheDead,
+    FactionNames.TheSyndicate,
+    FactionNames.KuaiGongInternational,
+    FactionNames.OmniTekIncorporated,
+    FactionNames.BladeIndustries,
   ]);
   if (augmentationExists(AugmentationNames.BionicSpine)) {
     delete Augmentations[AugmentationNames.BionicSpine];
@@ -479,7 +486,7 @@ function initAugmentations(): void {
     agility_mult: 1.6,
     dexterity_mult: 1.6,
   });
-  GrapheneBionicSpine.addToFactions(["Fulcrum Secret Technologies", "ECorp"]);
+  GrapheneBionicSpine.addToFactions([FactionNames.FulcrumSecretTechnologies, FactionNames.ECorp]);
   if (augmentationExists(AugmentationNames.GrapheneBionicSpine)) {
     delete Augmentations[AugmentationNames.GrapheneBionicSpine];
   }
@@ -493,11 +500,11 @@ function initAugmentations(): void {
     agility_mult: 1.6,
   });
   BionicLegs.addToFactions([
-    "Speakers for the Dead",
-    "The Syndicate",
-    "KuaiGong International",
-    "OmniTek Incorporated",
-    "Blade Industries",
+    FactionNames.SpeakersForTheDead,
+    FactionNames.TheSyndicate,
+    FactionNames.KuaiGongInternational,
+    FactionNames.OmniTekIncorporated,
+    FactionNames.BladeIndustries,
   ]);
   if (augmentationExists(AugmentationNames.BionicLegs)) {
     delete Augmentations[AugmentationNames.BionicLegs];
@@ -514,7 +521,7 @@ function initAugmentations(): void {
     prereqs: [AugmentationNames.BionicLegs],
     agility_mult: 2.5,
   });
-  GrapheneBionicLegs.addToFactions(["MegaCorp", "ECorp", "Fulcrum Secret Technologies"]);
+  GrapheneBionicLegs.addToFactions([FactionNames.MegaCorp, FactionNames.ECorp, FactionNames.FulcrumSecretTechnologies]);
   if (augmentationExists(AugmentationNames.GrapheneBionicLegs)) {
     delete Augmentations[AugmentationNames.GrapheneBionicLegs];
   }
@@ -532,14 +539,14 @@ function initAugmentations(): void {
     charisma_mult: 1.2,
   });
   SpeechProcessor.addToFactions([
-    "Tian Di Hui",
-    "Chongqing",
-    "Sector-12",
-    "New Tokyo",
-    "Aevum",
-    "Ishima",
-    "Volhaven",
-    "Silhouette",
+    FactionNames.TianDiHui,
+    FactionNames.Chongqing,
+    FactionNames.Sector12,
+    FactionNames.NewTokyo,
+    FactionNames.Aevum,
+    FactionNames.Ishima,
+    FactionNames.Volhaven,
+    FactionNames.Silhouette,
   ]);
   if (augmentationExists(AugmentationNames.SpeechProcessor)) {
     delete Augmentations[AugmentationNames.SpeechProcessor];
@@ -557,7 +564,9 @@ function initAugmentations(): void {
     charisma_mult: 1.15,
     charisma_exp_mult: 1.15,
   });
-  TITN41Injection.addToFactions(["Silhouette"]);
+  TITN41Injection.addToFactions([
+    FactionNames.Silhouette
+  ]);
   if (augmentationExists(AugmentationNames.TITN41Injection)) {
     delete Augmentations[AugmentationNames.TITN41Injection];
   }
@@ -577,11 +586,11 @@ function initAugmentations(): void {
     charisma_exp_mult: 1.6,
   });
   EnhancedSocialInteractionImplant.addToFactions([
-    "Bachman & Associates",
-    "NWO",
-    "Clarke Incorporated",
-    "OmniTek Incorporated",
-    "Four Sigma",
+    FactionNames.BachmanAssociates,
+    FactionNames.NWO,
+    FactionNames.ClarkeIncorporated,
+    FactionNames.OmniTekIncorporated,
+    FactionNames.FourSigma,
   ]);
   if (augmentationExists(AugmentationNames.EnhancedSocialInteractionImplant)) {
     delete Augmentations[AugmentationNames.EnhancedSocialInteractionImplant];
@@ -598,7 +607,7 @@ function initAugmentations(): void {
       "capabilities.",
     hacking_mult: 1.05,
   });
-  BitWire.addToFactions(["CyberSec", "NiteSec"]);
+  BitWire.addToFactions([FactionNames.CyberSec, FactionNames.NiteSec]);
   if (augmentationExists(AugmentationNames.BitWire)) {
     delete Augmentations[AugmentationNames.BitWire];
   }
@@ -618,7 +627,7 @@ function initAugmentations(): void {
     hacking_money_mult: 1.15,
     hacking_mult: 1.12,
   });
-  ArtificialBioNeuralNetwork.addToFactions(["BitRunners", "Fulcrum Secret Technologies"]);
+  ArtificialBioNeuralNetwork.addToFactions([FactionNames.BitRunners, FactionNames.FulcrumSecretTechnologies]);
   if (augmentationExists(AugmentationNames.ArtificialBioNeuralNetwork)) {
     delete Augmentations[AugmentationNames.ArtificialBioNeuralNetwork];
   }
@@ -635,7 +644,7 @@ function initAugmentations(): void {
     hacking_chance_mult: 1.05,
     hacking_exp_mult: 1.05,
   });
-  ArtificialSynapticPotentiation.addToFactions(["The Black Hand", "NiteSec"]);
+  ArtificialSynapticPotentiation.addToFactions([FactionNames.TheBlackHand, FactionNames.NiteSec]);
   if (augmentationExists(AugmentationNames.ArtificialSynapticPotentiation)) {
     delete Augmentations[AugmentationNames.ArtificialSynapticPotentiation];
   }
@@ -654,7 +663,7 @@ function initAugmentations(): void {
     hacking_exp_mult: 1.1,
     hacking_mult: 1.08,
   });
-  EnhancedMyelinSheathing.addToFactions(["Fulcrum Secret Technologies", "BitRunners", "The Black Hand"]);
+  EnhancedMyelinSheathing.addToFactions([FactionNames.FulcrumSecretTechnologies, FactionNames.BitRunners, FactionNames.TheBlackHand]);
   if (augmentationExists(AugmentationNames.EnhancedMyelinSheathing)) {
     delete Augmentations[AugmentationNames.EnhancedMyelinSheathing];
   }
@@ -669,7 +678,7 @@ function initAugmentations(): void {
       "induce stronger synaptic activity. This improves the user's cognitive abilities.",
     hacking_speed_mult: 1.03,
   });
-  SynapticEnhancement.addToFactions(["CyberSec", "Aevum"]);
+  SynapticEnhancement.addToFactions([FactionNames.CyberSec, FactionNames.Aevum]);
   if (augmentationExists(AugmentationNames.SynapticEnhancement)) {
     delete Augmentations[AugmentationNames.SynapticEnhancement];
   }
@@ -684,7 +693,7 @@ function initAugmentations(): void {
       "circuits, strengthening the ability to retain information.",
     hacking_exp_mult: 1.25,
   });
-  NeuralRetentionEnhancement.addToFactions(["NiteSec"]);
+  NeuralRetentionEnhancement.addToFactions([FactionNames.NiteSec]);
   if (augmentationExists(AugmentationNames.NeuralRetentionEnhancement)) {
     delete Augmentations[AugmentationNames.NeuralRetentionEnhancement];
   }
@@ -700,7 +709,7 @@ function initAugmentations(): void {
       "and delete it.",
     hacking_money_mult: 1.25,
   });
-  DataJack.addToFactions(["BitRunners", "The Black Hand", "NiteSec", "Chongqing", "New Tokyo"]);
+  DataJack.addToFactions([FactionNames.BitRunners, FactionNames.TheBlackHand, FactionNames.NiteSec, FactionNames.Chongqing, FactionNames.NewTokyo]);
   if (augmentationExists(AugmentationNames.DataJack)) {
     delete Augmentations[AugmentationNames.DataJack];
   }
@@ -719,14 +728,14 @@ function initAugmentations(): void {
     hacking_mult: 1.08,
   });
   ENM.addToFactions([
-    "BitRunners",
-    "The Black Hand",
-    "NiteSec",
-    "ECorp",
-    "MegaCorp",
-    "Fulcrum Secret Technologies",
-    "NWO",
-    "Blade Industries",
+    FactionNames.BitRunners,
+    FactionNames.TheBlackHand,
+    FactionNames.NiteSec,
+    FactionNames.ECorp,
+    FactionNames.MegaCorp,
+    FactionNames.FulcrumSecretTechnologies,
+    FactionNames.NWO,
+    FactionNames.BladeIndustries,
   ]);
   if (augmentationExists(AugmentationNames.ENM)) {
     delete Augmentations[AugmentationNames.ENM];
@@ -748,13 +757,13 @@ function initAugmentations(): void {
     hacking_mult: 1.07,
   });
   ENMCore.addToFactions([
-    "BitRunners",
-    "The Black Hand",
-    "ECorp",
-    "MegaCorp",
-    "Fulcrum Secret Technologies",
-    "NWO",
-    "Blade Industries",
+    FactionNames.BitRunners,
+    FactionNames.TheBlackHand,
+    FactionNames.ECorp,
+    FactionNames.MegaCorp,
+    FactionNames.FulcrumSecretTechnologies,
+    FactionNames.NWO,
+    FactionNames.BladeIndustries,
   ]);
   if (augmentationExists(AugmentationNames.ENMCore)) {
     delete Augmentations[AugmentationNames.ENMCore];
@@ -778,14 +787,14 @@ function initAugmentations(): void {
     hacking_mult: 1.08,
   });
   ENMCoreV2.addToFactions([
-    "BitRunners",
-    "ECorp",
-    "MegaCorp",
-    "Fulcrum Secret Technologies",
-    "NWO",
-    "Blade Industries",
-    "OmniTek Incorporated",
-    "KuaiGong International",
+    FactionNames.BitRunners,
+    FactionNames.ECorp,
+    FactionNames.MegaCorp,
+    FactionNames.FulcrumSecretTechnologies,
+    FactionNames.NWO,
+    FactionNames.BladeIndustries,
+    FactionNames.OmniTekIncorporated,
+    FactionNames.KuaiGongInternational,
   ]);
   if (augmentationExists(AugmentationNames.ENMCoreV2)) {
     delete Augmentations[AugmentationNames.ENMCoreV2];
@@ -808,13 +817,13 @@ function initAugmentations(): void {
     hacking_mult: 1.1,
   });
   ENMCoreV3.addToFactions([
-    "ECorp",
-    "MegaCorp",
-    "Fulcrum Secret Technologies",
-    "NWO",
-    "Daedalus",
-    "The Covenant",
-    "Illuminati",
+    FactionNames.ECorp,
+    FactionNames.MegaCorp,
+    FactionNames.FulcrumSecretTechnologies,
+    FactionNames.NWO,
+    FactionNames.Daedalus,
+    FactionNames.TheCovenant,
+    FactionNames.Illuminati,
   ]);
   if (augmentationExists(AugmentationNames.ENMCoreV3)) {
     delete Augmentations[AugmentationNames.ENMCoreV3];
@@ -832,13 +841,13 @@ function initAugmentations(): void {
     hacking_speed_mult: 1.1,
   });
   ENMAnalyzeEngine.addToFactions([
-    "ECorp",
-    "MegaCorp",
-    "Fulcrum Secret Technologies",
-    "NWO",
-    "Daedalus",
-    "The Covenant",
-    "Illuminati",
+    FactionNames.ECorp,
+    FactionNames.MegaCorp,
+    FactionNames.FulcrumSecretTechnologies,
+    FactionNames.NWO,
+    FactionNames.Daedalus,
+    FactionNames.TheCovenant,
+    FactionNames.Illuminati,
   ]);
   if (augmentationExists(AugmentationNames.ENMAnalyzeEngine)) {
     delete Augmentations[AugmentationNames.ENMAnalyzeEngine];
@@ -858,13 +867,13 @@ function initAugmentations(): void {
     hacking_chance_mult: 1.2,
   });
   ENMDMA.addToFactions([
-    "ECorp",
-    "MegaCorp",
-    "Fulcrum Secret Technologies",
-    "NWO",
-    "Daedalus",
-    "The Covenant",
-    "Illuminati",
+    FactionNames.ECorp,
+    FactionNames.MegaCorp,
+    FactionNames.FulcrumSecretTechnologies,
+    FactionNames.NWO,
+    FactionNames.Daedalus,
+    FactionNames.TheCovenant,
+    FactionNames.Illuminati,
   ]);
   if (augmentationExists(AugmentationNames.ENMDMA)) {
     delete Augmentations[AugmentationNames.ENMDMA];
@@ -883,16 +892,16 @@ function initAugmentations(): void {
     hacking_exp_mult: 1.12,
   });
   Neuralstimulator.addToFactions([
-    "The Black Hand",
-    "Chongqing",
-    "Sector-12",
-    "New Tokyo",
-    "Aevum",
-    "Ishima",
-    "Volhaven",
-    "Bachman & Associates",
-    "Clarke Incorporated",
-    "Four Sigma",
+    FactionNames.TheBlackHand,
+    FactionNames.Chongqing,
+    FactionNames.Sector12,
+    FactionNames.NewTokyo,
+    FactionNames.Aevum,
+    FactionNames.Ishima,
+    FactionNames.Volhaven,
+    FactionNames.BachmanAssociates,
+    FactionNames.ClarkeIncorporated,
+    FactionNames.FourSigma,
   ]);
   if (augmentationExists(AugmentationNames.Neuralstimulator)) {
     delete Augmentations[AugmentationNames.Neuralstimulator];
@@ -910,7 +919,7 @@ function initAugmentations(): void {
     hacking_exp_mult: 1.15,
     hacking_money_mult: 1.2,
   });
-  NeuralAccelerator.addToFactions(["BitRunners"]);
+  NeuralAccelerator.addToFactions([FactionNames.BitRunners]);
   if (augmentationExists(AugmentationNames.NeuralAccelerator)) {
     delete Augmentations[AugmentationNames.NeuralAccelerator];
   }
@@ -928,7 +937,7 @@ function initAugmentations(): void {
     hacking_speed_mult: 1.01,
     hacking_mult: 1.05,
   });
-  CranialSignalProcessorsG1.addToFactions(["CyberSec"]);
+  CranialSignalProcessorsG1.addToFactions([FactionNames.CyberSec]);
   if (augmentationExists(AugmentationNames.CranialSignalProcessorsG1)) {
     delete Augmentations[AugmentationNames.CranialSignalProcessorsG1];
   }
@@ -948,7 +957,7 @@ function initAugmentations(): void {
     hacking_chance_mult: 1.05,
     hacking_mult: 1.07,
   });
-  CranialSignalProcessorsG2.addToFactions(["CyberSec", "NiteSec"]);
+  CranialSignalProcessorsG2.addToFactions([FactionNames.CyberSec, FactionNames.NiteSec]);
   if (augmentationExists(AugmentationNames.CranialSignalProcessorsG2)) {
     delete Augmentations[AugmentationNames.CranialSignalProcessorsG2];
   }
@@ -968,7 +977,7 @@ function initAugmentations(): void {
     hacking_money_mult: 1.15,
     hacking_mult: 1.09,
   });
-  CranialSignalProcessorsG3.addToFactions(["NiteSec", "The Black Hand", "BitRunners"]);
+  CranialSignalProcessorsG3.addToFactions([FactionNames.NiteSec, FactionNames.TheBlackHand, FactionNames.BitRunners]);
   if (augmentationExists(AugmentationNames.CranialSignalProcessorsG3)) {
     delete Augmentations[AugmentationNames.CranialSignalProcessorsG3];
   }
@@ -988,7 +997,7 @@ function initAugmentations(): void {
     hacking_money_mult: 1.2,
     hacking_grow_mult: 1.25,
   });
-  CranialSignalProcessorsG4.addToFactions(["The Black Hand", "BitRunners"]);
+  CranialSignalProcessorsG4.addToFactions([FactionNames.TheBlackHand, FactionNames.BitRunners]);
   if (augmentationExists(AugmentationNames.CranialSignalProcessorsG4)) {
     delete Augmentations[AugmentationNames.CranialSignalProcessorsG4];
   }
@@ -1008,7 +1017,7 @@ function initAugmentations(): void {
     hacking_money_mult: 1.25,
     hacking_grow_mult: 1.75,
   });
-  CranialSignalProcessorsG5.addToFactions(["BitRunners"]);
+  CranialSignalProcessorsG5.addToFactions([FactionNames.BitRunners]);
   if (augmentationExists(AugmentationNames.CranialSignalProcessorsG5)) {
     delete Augmentations[AugmentationNames.CranialSignalProcessorsG5];
   }
@@ -1026,7 +1035,7 @@ function initAugmentations(): void {
     hacking_exp_mult: 1.1,
     hacking_speed_mult: 1.03,
   });
-  NeuronalDensification.addToFactions(["Clarke Incorporated"]);
+  NeuronalDensification.addToFactions([FactionNames.ClarkeIncorporated]);
   if (augmentationExists(AugmentationNames.NeuronalDensification)) {
     delete Augmentations[AugmentationNames.NeuronalDensification];
   }
@@ -1044,13 +1053,13 @@ function initAugmentations(): void {
     company_rep_mult: 1.2,
   });
   NuoptimalInjectorImplant.addToFactions([
-    "Tian Di Hui",
-    "Volhaven",
-    "New Tokyo",
-    "Chongqing",
-    "Clarke Incorporated",
-    "Four Sigma",
-    "Bachman & Associates",
+    FactionNames.TianDiHui,
+    FactionNames.Volhaven,
+    FactionNames.NewTokyo,
+    FactionNames.Chongqing,
+    FactionNames.ClarkeIncorporated,
+    FactionNames.FourSigma,
+    FactionNames.BachmanAssociates,
   ]);
   if (augmentationExists(AugmentationNames.NuoptimalInjectorImplant)) {
     delete Augmentations[AugmentationNames.NuoptimalInjectorImplant];
@@ -1069,12 +1078,12 @@ function initAugmentations(): void {
     charisma_mult: 1.1,
   });
   SpeechEnhancement.addToFactions([
-    "Tian Di Hui",
-    "Speakers for the Dead",
-    "Four Sigma",
-    "KuaiGong International",
-    "Clarke Incorporated",
-    "Bachman & Associates",
+    FactionNames.TianDiHui,
+    FactionNames.SpeakersForTheDead,
+    FactionNames.FourSigma,
+    FactionNames.KuaiGongInternational,
+    FactionNames.ClarkeIncorporated,
+    FactionNames.BachmanAssociates,
   ]);
   if (augmentationExists(AugmentationNames.SpeechEnhancement)) {
     delete Augmentations[AugmentationNames.SpeechEnhancement];
@@ -1095,7 +1104,7 @@ function initAugmentations(): void {
     company_rep_mult: 1.1,
     work_money_mult: 1.2,
   });
-  FocusWire.addToFactions(["Bachman & Associates", "Clarke Incorporated", "Four Sigma", "KuaiGong International"]);
+  FocusWire.addToFactions([FactionNames.BachmanAssociates, FactionNames.ClarkeIncorporated, FactionNames.FourSigma, FactionNames.KuaiGongInternational]);
   if (augmentationExists(AugmentationNames.FocusWire)) {
     delete Augmentations[AugmentationNames.FocusWire];
   }
@@ -1112,7 +1121,7 @@ function initAugmentations(): void {
     company_rep_mult: 1.3,
     hacking_mult: 1.08,
   });
-  PCDNI.addToFactions(["Four Sigma", "OmniTek Incorporated", "ECorp", "Blade Industries"]);
+  PCDNI.addToFactions([FactionNames.FourSigma, FactionNames.OmniTekIncorporated, FactionNames.ECorp, FactionNames.BladeIndustries]);
   if (augmentationExists(AugmentationNames.PCDNI)) {
     delete Augmentations[AugmentationNames.PCDNI];
   }
@@ -1130,7 +1139,7 @@ function initAugmentations(): void {
     company_rep_mult: 1.75,
     hacking_mult: 1.1,
   });
-  PCDNIOptimizer.addToFactions(["Fulcrum Secret Technologies", "ECorp", "Blade Industries"]);
+  PCDNIOptimizer.addToFactions([FactionNames.FulcrumSecretTechnologies, FactionNames.ECorp, FactionNames.BladeIndustries]);
   if (augmentationExists(AugmentationNames.PCDNIOptimizer)) {
     delete Augmentations[AugmentationNames.PCDNIOptimizer];
   }
@@ -1150,7 +1159,7 @@ function initAugmentations(): void {
     hacking_mult: 1.1,
     hacking_speed_mult: 1.05,
   });
-  PCDNINeuralNetwork.addToFactions(["Fulcrum Secret Technologies"]);
+  PCDNINeuralNetwork.addToFactions([FactionNames.FulcrumSecretTechnologies]);
   if (augmentationExists(AugmentationNames.PCDNINeuralNetwork)) {
     delete Augmentations[AugmentationNames.PCDNINeuralNetwork];
   }
@@ -1167,7 +1176,7 @@ function initAugmentations(): void {
     company_rep_mult: 1.1,
     faction_rep_mult: 1.1,
   });
-  ADRPheromone1.addToFactions(["Tian Di Hui", "The Syndicate", "NWO", "MegaCorp", "Four Sigma"]);
+  ADRPheromone1.addToFactions([FactionNames.TianDiHui, FactionNames.TheSyndicate, FactionNames.NWO, FactionNames.MegaCorp, FactionNames.FourSigma]);
   if (augmentationExists(AugmentationNames.ADRPheromone1)) {
     delete Augmentations[AugmentationNames.ADRPheromone1];
   }
@@ -1184,7 +1193,7 @@ function initAugmentations(): void {
     company_rep_mult: 1.2,
     faction_rep_mult: 1.2,
   });
-  ADRPheromone2.addToFactions(["Silhouette", "Four Sigma", "Bachman & Associates", "Clarke Incorporated"]);
+  ADRPheromone2.addToFactions([FactionNames.Silhouette, FactionNames.FourSigma, FactionNames.BachmanAssociates, FactionNames.ClarkeIncorporated]);
   if (augmentationExists(AugmentationNames.ADRPheromone2)) {
     delete Augmentations[AugmentationNames.ADRPheromone2];
   }
@@ -1203,7 +1212,11 @@ function initAugmentations(): void {
     company_rep_mult: 1.15,
     faction_rep_mult: 1.15,
   });
-  ShadowsSimulacrum.addToFactions(["The Syndicate", "The Dark Army", "Speakers for the Dead"]);
+  ShadowsSimulacrum.addToFactions([
+    FactionNames.TheSyndicate,
+    FactionNames.TheDarkArmy,
+    FactionNames.SpeakersForTheDead
+  ]);
   if (augmentationExists(AugmentationNames.ShadowsSimulacrum)) {
     delete Augmentations[AugmentationNames.ShadowsSimulacrum];
   }
@@ -1221,7 +1234,7 @@ function initAugmentations(): void {
     hacknet_node_money_mult: 1.15,
     hacknet_node_purchase_cost_mult: 0.85,
   });
-  HacknetNodeCPUUpload.addToFactions(["Netburners"]);
+  HacknetNodeCPUUpload.addToFactions([FactionNames.Netburners]);
   if (augmentationExists(AugmentationNames.HacknetNodeCPUUpload)) {
     delete Augmentations[AugmentationNames.HacknetNodeCPUUpload];
   }
@@ -1238,7 +1251,7 @@ function initAugmentations(): void {
     hacknet_node_money_mult: 1.1,
     hacknet_node_level_cost_mult: 0.85,
   });
-  HacknetNodeCacheUpload.addToFactions(["Netburners"]);
+  HacknetNodeCacheUpload.addToFactions([FactionNames.Netburners]);
   if (augmentationExists(AugmentationNames.HacknetNodeCacheUpload)) {
     delete Augmentations[AugmentationNames.HacknetNodeCacheUpload];
   }
@@ -1255,7 +1268,7 @@ function initAugmentations(): void {
     hacknet_node_money_mult: 1.1,
     hacknet_node_purchase_cost_mult: 0.9,
   });
-  HacknetNodeNICUpload.addToFactions(["Netburners"]);
+  HacknetNodeNICUpload.addToFactions([FactionNames.Netburners]);
   if (augmentationExists(AugmentationNames.HacknetNodeNICUpload)) {
     delete Augmentations[AugmentationNames.HacknetNodeNICUpload];
   }
@@ -1271,7 +1284,7 @@ function initAugmentations(): void {
       "electrochemical signals.",
     hacknet_node_money_mult: 1.25,
   });
-  HacknetNodeKernelDNI.addToFactions(["Netburners"]);
+  HacknetNodeKernelDNI.addToFactions([FactionNames.Netburners]);
   if (augmentationExists(AugmentationNames.HacknetNodeKernelDNI)) {
     delete Augmentations[AugmentationNames.HacknetNodeKernelDNI];
   }
@@ -1287,7 +1300,7 @@ function initAugmentations(): void {
       "electrochemical signals.",
     hacknet_node_money_mult: 1.45,
   });
-  HacknetNodeCoreDNI.addToFactions(["Netburners"]);
+  HacknetNodeCoreDNI.addToFactions([FactionNames.Netburners]);
   if (augmentationExists(AugmentationNames.HacknetNodeCoreDNI)) {
     delete Augmentations[AugmentationNames.HacknetNodeCoreDNI];
   }
@@ -1379,7 +1392,7 @@ function initAugmentations(): void {
     agility_exp_mult: 1.1,
     charisma_exp_mult: 1.1,
   });
-  Neurotrainer1.addToFactions(["CyberSec", "Aevum"]);
+  Neurotrainer1.addToFactions([FactionNames.CyberSec, FactionNames.Aevum]);
   if (augmentationExists(AugmentationNames.Neurotrainer1)) {
     delete Augmentations[AugmentationNames.Neurotrainer1];
   }
@@ -1400,7 +1413,7 @@ function initAugmentations(): void {
     agility_exp_mult: 1.15,
     charisma_exp_mult: 1.15,
   });
-  Neurotrainer2.addToFactions(["BitRunners", "NiteSec"]);
+  Neurotrainer2.addToFactions([FactionNames.BitRunners, FactionNames.NiteSec]);
   if (augmentationExists(AugmentationNames.Neurotrainer2)) {
     delete Augmentations[AugmentationNames.Neurotrainer2];
   }
@@ -1421,7 +1434,7 @@ function initAugmentations(): void {
     agility_exp_mult: 1.2,
     charisma_exp_mult: 1.2,
   });
-  Neurotrainer3.addToFactions(["NWO", "Four Sigma"]);
+  Neurotrainer3.addToFactions([FactionNames.NWO, FactionNames.FourSigma]);
   if (augmentationExists(AugmentationNames.Neurotrainer3)) {
     delete Augmentations[AugmentationNames.Neurotrainer3];
   }
@@ -1439,7 +1452,7 @@ function initAugmentations(): void {
     hacking_speed_mult: 1.03,
     hacking_money_mult: 1.1,
   });
-  Hypersight.addToFactions(["Blade Industries", "KuaiGong International"]);
+  Hypersight.addToFactions([FactionNames.BladeIndustries, FactionNames.KuaiGongInternational]);
   if (augmentationExists(AugmentationNames.Hypersight)) {
     delete Augmentations[AugmentationNames.Hypersight];
   }
@@ -1456,7 +1469,7 @@ function initAugmentations(): void {
     agility_mult: 1.05,
     crime_money_mult: 1.1,
   });
-  LuminCloaking1.addToFactions(["Slum Snakes", "Tetrads"]);
+  LuminCloaking1.addToFactions([FactionNames.SlumSnakes, FactionNames.Tetrads]);
   if (augmentationExists(AugmentationNames.LuminCloaking1)) {
     delete Augmentations[AugmentationNames.LuminCloaking1];
   }
@@ -1476,7 +1489,7 @@ function initAugmentations(): void {
     defense_mult: 1.1,
     crime_money_mult: 1.25,
   });
-  LuminCloaking2.addToFactions(["Slum Snakes", "Tetrads"]);
+  LuminCloaking2.addToFactions([FactionNames.SlumSnakes, FactionNames.Tetrads]);
   if (augmentationExists(AugmentationNames.LuminCloaking2)) {
     delete Augmentations[AugmentationNames.LuminCloaking2];
   }
@@ -1491,7 +1504,7 @@ function initAugmentations(): void {
     dexterity_exp_mult: 1.15,
     crime_money_mult: 1.25,
   });
-  SmartSonar.addToFactions(["Slum Snakes"]);
+  SmartSonar.addToFactions([FactionNames.SlumSnakes]);
   if (augmentationExists(AugmentationNames.SmartSonar)) {
     delete Augmentations[AugmentationNames.SmartSonar];
   }
@@ -1518,7 +1531,7 @@ function initAugmentations(): void {
     agility_exp_mult: 1.1,
     charisma_exp_mult: 1.1,
   });
-  PowerRecirculator.addToFactions(["Tetrads", "The Dark Army", "The Syndicate", "NWO"]);
+  PowerRecirculator.addToFactions([FactionNames.Tetrads, FactionNames.TheDarkArmy, FactionNames.TheSyndicate, FactionNames.NWO]);
   if (augmentationExists(AugmentationNames.PowerRecirculator)) {
     delete Augmentations[AugmentationNames.PowerRecirculator];
   }
@@ -1535,7 +1548,7 @@ function initAugmentations(): void {
     repCost: 1.875e6,
     moneyCost: 2.5e13,
     info:
-      "A brain implant that wirelessly connects you to the Illuminati's " +
+      `A brain implant that wirelessly connects you to the ${FactionNames.Illuminati}'s ` +
       "quantum supercomputer, allowing you to access and use its incredible " +
       "computing power.",
     hacking_mult: 1.75,
@@ -1543,7 +1556,7 @@ function initAugmentations(): void {
     hacking_chance_mult: 2.5,
     hacking_money_mult: 4,
   });
-  QLink.addToFactions(["Illuminati"]);
+  QLink.addToFactions([FactionNames.Illuminati]);
   if (augmentationExists(AugmentationNames.QLink)) {
     delete Augmentations[AugmentationNames.QLink];
   }
@@ -1557,7 +1570,7 @@ function initAugmentations(): void {
     info: "It's time to leave the cave.",
     stats: null,
   });
-  RedPill.addToFactions(["Daedalus"]);
+  RedPill.addToFactions([FactionNames.Daedalus]);
   if (augmentationExists(AugmentationNames.TheRedPill)) {
     delete Augmentations[AugmentationNames.TheRedPill];
   }
@@ -1579,7 +1592,7 @@ function initAugmentations(): void {
     agility_mult: 1.75,
     hacking_mult: 1.15,
   });
-  SPTN97.addToFactions(["The Covenant"]);
+  SPTN97.addToFactions([FactionNames.TheCovenant]);
   if (augmentationExists(AugmentationNames.SPTN97)) {
     delete Augmentations[AugmentationNames.SPTN97];
   }
@@ -1591,13 +1604,13 @@ function initAugmentations(): void {
     repCost: 1.5e6,
     moneyCost: 5.5e9,
     info:
-      "A brain implant developed by ECorp. They do not reveal what " +
+      `A brain implant developed by ${FactionNames.ECorp}. They do not reveal what ` +
       "exactly the implant does, but they promise that it will greatly " +
       "enhance your abilities.",
     hacking_grow_mult: 3,
     stats: null,
   });
-  HiveMind.addToFactions(["ECorp"]);
+  HiveMind.addToFactions([FactionNames.ECorp]);
   if (augmentationExists(AugmentationNames.HiveMind)) {
     delete Augmentations[AugmentationNames.HiveMind];
   }
@@ -1622,7 +1635,7 @@ function initAugmentations(): void {
     dexterity_exp_mult: 1.35,
     agility_exp_mult: 1.35,
   });
-  CordiARCReactor.addToFactions(["MegaCorp"]);
+  CordiARCReactor.addToFactions([FactionNames.MegaCorp]);
   if (augmentationExists(AugmentationNames.CordiARCReactor)) {
     delete Augmentations[AugmentationNames.CordiARCReactor];
   }
@@ -1642,7 +1655,7 @@ function initAugmentations(): void {
     company_rep_mult: 1.25,
     faction_rep_mult: 1.25,
   });
-  SmartJaw.addToFactions(["Bachman & Associates"]);
+  SmartJaw.addToFactions([FactionNames.BachmanAssociates]);
   if (augmentationExists(AugmentationNames.SmartJaw)) {
     delete Augmentations[AugmentationNames.SmartJaw];
   }
@@ -1661,7 +1674,7 @@ function initAugmentations(): void {
     strength_mult: 1.55,
     defense_mult: 1.55,
   });
-  Neotra.addToFactions(["Blade Industries"]);
+  Neotra.addToFactions([FactionNames.BladeIndustries]);
   if (augmentationExists(AugmentationNames.Neotra)) {
     delete Augmentations[AugmentationNames.Neotra];
   }
@@ -1689,7 +1702,7 @@ function initAugmentations(): void {
     agility_exp_mult: 1.15,
     charisma_exp_mult: 1.15,
   });
-  Xanipher.addToFactions(["NWO"]);
+  Xanipher.addToFactions([FactionNames.NWO]);
   if (augmentationExists(AugmentationNames.Xanipher)) {
     delete Augmentations[AugmentationNames.Xanipher];
   }
@@ -1707,7 +1720,7 @@ function initAugmentations(): void {
       "gets more powerful over time for seemingly no reason.",
     strength_mult: 2.7,
   });
-  HydroflameLeftArm.addToFactions(["NWO"]);
+  HydroflameLeftArm.addToFactions([FactionNames.NWO]);
   if (augmentationExists(AugmentationNames.HydroflameLeftArm)) {
     delete Augmentations[AugmentationNames.HydroflameLeftArm];
   }
@@ -1729,7 +1742,7 @@ function initAugmentations(): void {
     agility_mult: 1.2,
     charisma_mult: 1.2,
   });
-  nextSENS.addToFactions(["Clarke Incorporated"]);
+  nextSENS.addToFactions([FactionNames.ClarkeIncorporated]);
   if (augmentationExists(AugmentationNames.nextSENS)) {
     delete Augmentations[AugmentationNames.nextSENS];
   }
@@ -1747,7 +1760,7 @@ function initAugmentations(): void {
     hacking_mult: 1.2,
     hacking_exp_mult: 1.25,
   });
-  OmniTekInfoLoad.addToFactions(["OmniTek Incorporated"]);
+  OmniTekInfoLoad.addToFactions([FactionNames.OmniTekIncorporated]);
   if (augmentationExists(AugmentationNames.OmniTekInfoLoad)) {
     delete Augmentations[AugmentationNames.OmniTekInfoLoad];
   }
@@ -1770,7 +1783,7 @@ function initAugmentations(): void {
     defense_mult: 1.4,
     agility_mult: 1.4,
   });
-  PhotosyntheticCells.addToFactions(["KuaiGong International"]);
+  PhotosyntheticCells.addToFactions([FactionNames.KuaiGongInternational]);
   if (augmentationExists(AugmentationNames.PhotosyntheticCells)) {
     delete Augmentations[AugmentationNames.PhotosyntheticCells];
   }
@@ -1783,7 +1796,7 @@ function initAugmentations(): void {
     moneyCost: 4.375e9,
     info:
       "A brain implant that provides a high-bandwidth, direct neural link between your " +
-      "mind and the BitRunners' data servers, which reportedly contain " +
+      `mind and the ${FactionNames.BitRunners}' data servers, which reportedly contain ` +
       "the largest database of hacking tools and information in the world.",
     hacking_mult: 1.15,
     hacking_exp_mult: 1.2,
@@ -1791,7 +1804,7 @@ function initAugmentations(): void {
     hacking_speed_mult: 1.05,
     programs: [Programs.FTPCrackProgram.name, Programs.RelaySMTPProgram.name],
   });
-  Neurolink.addToFactions(["BitRunners"]);
+  Neurolink.addToFactions([FactionNames.BitRunners]);
   if (augmentationExists(AugmentationNames.Neurolink)) {
     delete Augmentations[AugmentationNames.Neurolink];
   }
@@ -1813,7 +1826,7 @@ function initAugmentations(): void {
     hacking_speed_mult: 1.02,
     hacking_money_mult: 1.1,
   });
-  TheBlackHand.addToFactions(["The Black Hand"]);
+  TheBlackHand.addToFactions([FactionNames.TheBlackHand]);
   if (augmentationExists(AugmentationNames.TheBlackHand)) {
     delete Augmentations[AugmentationNames.TheBlackHand];
   }
@@ -1831,7 +1844,7 @@ function initAugmentations(): void {
     hacking_mult: 1.08,
     hacking_exp_mult: 1.15,
   });
-  CRTX42AA.addToFactions(["NiteSec"]);
+  CRTX42AA.addToFactions([FactionNames.NiteSec]);
   if (augmentationExists(AugmentationNames.CRTX42AA)) {
     delete Augmentations[AugmentationNames.CRTX42AA];
   }
@@ -1848,7 +1861,7 @@ function initAugmentations(): void {
       "regenerate, and strengthen themselves.",
     hacking_exp_mult: 1.4,
   });
-  Neuregen.addToFactions(["Chongqing"]);
+  Neuregen.addToFactions([FactionNames.Chongqing]);
   if (augmentationExists(AugmentationNames.Neuregen)) {
     delete Augmentations[AugmentationNames.Neuregen];
   }
@@ -1868,7 +1881,7 @@ function initAugmentations(): void {
     startingMoney: 1e6,
     programs: [Programs.BruteSSHProgram.name],
   });
-  CashRoot.addToFactions(["Sector-12"]);
+  CashRoot.addToFactions([FactionNames.Sector12]);
   if (augmentationExists(AugmentationNames.CashRoot)) {
     delete Augmentations[AugmentationNames.CashRoot];
   }
@@ -1889,7 +1902,7 @@ function initAugmentations(): void {
     dexterity_exp_mult: 1.2,
     agility_exp_mult: 1.2,
   });
-  NutriGen.addToFactions(["New Tokyo"]);
+  NutriGen.addToFactions([FactionNames.NewTokyo]);
   if (augmentationExists(AugmentationNames.NutriGen)) {
     delete Augmentations[AugmentationNames.NutriGen];
   }
@@ -1913,7 +1926,7 @@ function initAugmentations(): void {
     crime_money_mult: 1.0777,
     programs: [Programs.DeepscanV1.name, Programs.AutoLink.name],
   });
-  PCMatrix.addToFactions(["Aevum"]);
+  PCMatrix.addToFactions([FactionNames.Aevum]);
   if (augmentationExists(AugmentationNames.PCMatrix)) {
     delete Augmentations[AugmentationNames.PCMatrix];
   }
@@ -1929,7 +1942,7 @@ function initAugmentations(): void {
     crime_money_mult: 1.1,
     dexterity_mult: 1.1,
   });
-  INFRARet.addToFactions(["Ishima"]);
+  INFRARet.addToFactions([FactionNames.Ishima]);
   if (augmentationExists(AugmentationNames.INFRARet)) {
     delete Augmentations[AugmentationNames.INFRARet];
   }
@@ -1946,7 +1959,7 @@ function initAugmentations(): void {
       "creating an energy barrier around the user.",
     defense_mult: 1.4,
   });
-  DermaForce.addToFactions(["Volhaven"]);
+  DermaForce.addToFactions([FactionNames.Volhaven]);
   if (augmentationExists(AugmentationNames.DermaForce)) {
     delete Augmentations[AugmentationNames.DermaForce];
   }
@@ -1967,7 +1980,7 @@ function initAugmentations(): void {
     crime_success_mult: 1.1,
     crime_money_mult: 1.3,
   });
-  GrapheneBrachiBlades.addToFactions(["Speakers for the Dead"]);
+  GrapheneBrachiBlades.addToFactions([FactionNames.SpeakersForTheDead]);
   if (augmentationExists(AugmentationNames.GrapheneBrachiBlades)) {
     delete Augmentations[AugmentationNames.GrapheneBrachiBlades];
   }
@@ -1986,7 +1999,7 @@ function initAugmentations(): void {
     strength_mult: 1.85,
     dexterity_mult: 1.85,
   });
-  GrapheneBionicArms.addToFactions(["The Dark Army"]);
+  GrapheneBionicArms.addToFactions([FactionNames.TheDarkArmy]);
   if (augmentationExists(AugmentationNames.GrapheneBionicArms)) {
     delete Augmentations[AugmentationNames.GrapheneBionicArms];
   }
@@ -2003,7 +2016,7 @@ function initAugmentations(): void {
     crime_success_mult: 1.1,
     crime_money_mult: 1.15,
   });
-  BrachiBlades.addToFactions(["The Syndicate"]);
+  BrachiBlades.addToFactions([FactionNames.TheSyndicate]);
   if (augmentationExists(AugmentationNames.BrachiBlades)) {
     delete Augmentations[AugmentationNames.BrachiBlades];
   }
@@ -2019,7 +2032,7 @@ function initAugmentations(): void {
     strength_mult: 1.3,
     dexterity_mult: 1.3,
   });
-  BionicArms.addToFactions(["Tetrads"]);
+  BionicArms.addToFactions([FactionNames.Tetrads]);
   if (augmentationExists(AugmentationNames.BionicArms)) {
     delete Augmentations[AugmentationNames.BionicArms];
   }
@@ -2037,7 +2050,7 @@ function initAugmentations(): void {
     company_rep_mult: 1.15,
     faction_rep_mult: 1.15,
   });
-  SNA.addToFactions(["Tian Di Hui"]);
+  SNA.addToFactions([FactionNames.TianDiHui]);
   if (augmentationExists(AugmentationNames.SNA)) {
     delete Augmentations[AugmentationNames.SNA];
   }
@@ -2059,14 +2072,14 @@ function initAugmentations(): void {
       </>
     ),
   });
-  NeuroreceptorManager.addToFactions(["Tian Di Hui"]);
+  NeuroreceptorManager.addToFactions([FactionNames.TianDiHui]);
   if (augmentationExists(AugmentationNames.NeuroreceptorManager)) {
     delete Augmentations[AugmentationNames.NeuroreceptorManager];
   }
   AddToAugmentations(NeuroreceptorManager);
 
   // Special Bladeburner Augmentations
-  const BladeburnersFactionName = "Bladeburners";
+  const BladeburnersFactionName = FactionNames.Bladeburners;
   if (factionExists(BladeburnersFactionName)) {
     const EsperEyewear = new Augmentation({
       name: AugmentationNames.EsperEyewear,
@@ -2233,7 +2246,7 @@ function initAugmentations(): void {
       repCost: 2e4,
       moneyCost: 8.25e9,
       info:
-        "A cybernetic foot augmentation that was specifically created for Bladeburners " +
+        `A cybernetic foot augmentation that was specifically created for ${BladeburnersFactionName} ` +
         "during the Synthoid Uprising. The organic musculature of the human foot " +
         "is enhanced with flexible carbon nanotube matrices that are controlled by " +
         "intelligent servo-motors.",
@@ -2250,7 +2263,7 @@ function initAugmentations(): void {
       repCost: 1.25e4,
       moneyCost: 1.375e9,
       info:
-        "A powered exoskeleton suit designed as armor for Bladeburner units. This " +
+        `A powered exoskeleton suit designed as armor for ${BladeburnersFactionName} units. This ` +
         "exoskeleton is incredibly adaptable and can protect the wearer from blunt, piercing, " +
         "concussive, thermal, chemical, and electric trauma. It also enhances the user's " +
         "physical abilities.",
@@ -2366,7 +2379,7 @@ function initAugmentations(): void {
   }
 
   // Special CotMG Augmentations
-  const ChurchOfTheMachineGodFactionName = "Church of the Machine God";
+  const ChurchOfTheMachineGodFactionName = FactionNames.ChurchOfTheMachineGod;
   if (factionExists(ChurchOfTheMachineGodFactionName)) {
     const StaneksGift1 = new Augmentation({
       name: AugmentationNames.StaneksGift1,
@@ -2584,9 +2597,9 @@ function installAugmentations(): boolean {
   Player.queuedAugmentations = [];
   dialogBoxCreate(
     "You slowly drift to sleep as scientists put you under in order " +
-      "to install the following Augmentations:<br>" +
-      augmentationList +
-      "<br>You wake up in your home...you feel different...",
+    "to install the following Augmentations:<br>" +
+    augmentationList +
+    "<br>You wake up in your home...you feel different...",
   );
   prestigeAugmentation();
   return true;
