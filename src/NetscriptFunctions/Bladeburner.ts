@@ -3,9 +3,9 @@ import { WorkerScript } from "../Netscript/WorkerScript";
 import { IPlayer } from "../PersonObjects/IPlayer";
 import { Bladeburner } from "../Bladeburner/Bladeburner";
 import { getRamCost } from "../Netscript/RamCostGenerator";
-import { BitNodeMultipliers } from "../BitNode/BitNodeMultipliers";
+import { getBitNodeMultipliers } from "../BitNode/BitNodeMultipliers";
 import { Bladeburner as INetscriptBladeburner, BladeburnerCurAction } from "../ScriptEditor/NetscriptDefinitions";
-import { IAction } from "src/Bladeburner/IAction";
+import { IAction } from "../Bladeburner/IAction";
 
 export function NetscriptBladeburner(
   player: IPlayer,
@@ -169,7 +169,7 @@ export function NetscriptBladeburner(
         rewardMultiplier = Math.pow(action.rewardFac, level - 1);
       }
 
-      return action.rankGain * rewardMultiplier * BitNodeMultipliers.BladeburnerRank;
+      return action.rankGain * rewardMultiplier * getBitNodeMultipliers(player).BladeburnerRank;
     },
     getActionCountRemaining: function (_type: unknown, _name: unknown): number {
       updateRam("getActionCountRemaining");

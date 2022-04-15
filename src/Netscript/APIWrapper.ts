@@ -4,7 +4,7 @@ import type { BaseServer } from "../Server/BaseServer";
 import type { WorkerScript } from "./WorkerScript";
 import { makeRuntimeRejectMsg } from "../NetscriptEvaluator";
 import { Player } from "../Player";
-import { CityName } from "src/Locations/data/CityNames";
+import { CityName } from "../Locations/data/CityNames";
 
 type ExternalFunction = (...args: any[]) => any;
 type ExternalAPI = {

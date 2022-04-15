@@ -1,4 +1,4 @@
-import { IPlayer } from "src/PersonObjects/IPlayer";
+import { IPlayer } from "../PersonObjects/IPlayer";
 import { MaterialSizes } from "./MaterialSizes";
 import { ICorporation } from "./ICorporation";
 import { IIndustry } from "./IIndustry";

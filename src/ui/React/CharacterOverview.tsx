@@ -22,7 +22,7 @@ import ClearAllIcon from "@mui/icons-material/ClearAll";
 import { Settings } from "../../Settings/Settings";
 import { use } from "../Context";
 import { StatsProgressOverviewCell } from "./StatsProgressBar";
-import { BitNodeMultipliers } from "../../BitNode/BitNodeMultipliers";
+import { getBitNodeMultipliers } from "../../BitNode/BitNodeMultipliers";
 
 import { Box, Tooltip } from "@mui/material";
 import { CONSTANTS } from "../../Constants";
@@ -276,29 +276,31 @@ export function CharacterOverview({ save, killScripts }: IProps): React.ReactEle
   const classes = useStyles();
   const theme = useTheme();
 
+  const bitNodeMultipliers = getBitNodeMultipliers(player);
+
   const hackingProgress = player.calculateSkillProgress(
     player.hacking_exp,
-    player.hacking_mult * BitNodeMultipliers.HackingLevelMultiplier,
+    player.hacking_mult * bitNodeMultipliers.HackingLevelMultiplier,
   );
   const strengthProgress = player.calculateSkillProgress(
     player.strength_exp,
-    player.strength_mult * BitNodeMultipliers.StrengthLevelMultiplier,
+    player.strength_mult * bitNodeMultipliers.StrengthLevelMultiplier,
   );
   const defenseProgress = player.calculateSkillProgress(
     player.defense_exp,
-    player.defense_mult * BitNodeMultipliers.DefenseLevelMultiplier,
+    player.defense_mult * bitNodeMultipliers.DefenseLevelMultiplier,
   );
   const dexterityProgress = player.calculateSkillProgress(
     player.dexterity_exp,
-    player.dexterity_mult * BitNodeMultipliers.DexterityLevelMultiplier,
+    player.dexterity_mult * bitNodeMultipliers.DexterityLevelMultiplier,
   );
   const agilityProgress = player.calculateSkillProgress(
     player.agility_exp,
-    player.agility_mult * BitNodeMultipliers.AgilityLevelMultiplier,
+    player.agility_mult * bitNodeMultipliers.AgilityLevelMultiplier,
   );
   const charismaProgress = player.calculateSkillProgress(
     player.charisma_exp,
-    player.charisma_mult * BitNodeMultipliers.CharismaLevelMultiplier,
+    player.charisma_mult * bitNodeMultipliers.CharismaLevelMultiplier,
   );
 
   return (

@@ -6400,9 +6400,10 @@ export interface NS {
    * print(ServerMaxMoney);
    * print(HackExpGain);
    * ```
+   * @param bitNode - Optional bitnode number to get multipliers for, defaults to current bitnode
    * @returns Object containing the current BitNode multipliers.
    */
-  getBitNodeMultipliers(): BitNodeMultipliers;
+  getBitNodeMultipliers(bitNode?:number): BitNodeMultipliers;
 
   /**
    * Get a list of acquired Source-Files.

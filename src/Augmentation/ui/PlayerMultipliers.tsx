@@ -4,7 +4,7 @@
 import { DoubleArrow } from "@mui/icons-material";
 import { List, ListItem, ListItemText, Paper, Typography } from "@mui/material";
 import * as React from "react";
-import { BitNodeMultipliers } from "../../BitNode/BitNodeMultipliers";
+import { getBitNodeMultipliers } from "../../BitNode/BitNodeMultipliers";
 import { Player } from "../../Player";
 import { Settings } from "../../Settings/Settings";
 import { numeralWrapper } from "../../ui/numeralFormat";
@@ -93,6 +93,7 @@ function MultiplierList(props: IMultiplierListProps): React.ReactElement {
 
 export function PlayerMultipliers(): React.ReactElement {
   const mults = calculateAugmentedStats();
+  const bitNodeMultipliers = getBitNodeMultipliers(Player);
 
   // Column data is a bit janky, so it's set up here to allow for
   // easier logic in setting up the layout
@@ -106,13 +107,13 @@ export function PlayerMultipliers(): React.ReactElement {
         "Hacking Level ",
         Player.hacking_mult,
         Player.hacking_mult * mults.hacking_mult,
-        BitNodeMultipliers.HackingLevelMultiplier,
+        bitNodeMultipliers.HackingLevelMultiplier,
       ],
       [
         "Hacking Experience ",
         Player.hacking_exp_mult,
         Player.hacking_exp_mult * mults.hacking_exp_mult,
-        BitNodeMultipliers.HackExpGain,
+        bitNodeMultipliers.HackExpGain,
       ],
     ].map((data): MultiplierListItemData => (data as any).concat([Settings.theme.hack])),
     ...[
@@ -120,28 +121,28 @@ export function PlayerMultipliers(): React.ReactElement {
         "Strength Level ",
         Player.strength_mult,
         Player.strength_mult * mults.strength_mult,
-        BitNodeMultipliers.StrengthLevelMultiplier,
+        bitNodeMultipliers.StrengthLevelMultiplier,
       ],
       ["Strength Experience ", Player.strength_exp_mult, Player.strength_exp_mult * mults.strength_exp_mult, 1],
       [
         "Defense Level ",
         Player.defense_mult,
         Player.defense_mult * mults.defense_mult,
-        BitNodeMultipliers.DefenseLevelMultiplier,
+        bitNodeMultipliers.DefenseLevelMultiplier,
       ],
       ["Defense Experience ", Player.defense_exp_mult, Player.defense_exp_mult * mults.defense_exp_mult, 1],
       [
         "Dexterity Level ",
         Player.dexterity_mult,
         Player.dexterity_mult * mults.dexterity_mult,
-        BitNodeMultipliers.DexterityLevelMultiplier,
+        bitNodeMultipliers.DexterityLevelMultiplier,
       ],
       ["Dexterity Experience ", Player.dexterity_exp_mult, Player.dexterity_exp_mult * mults.dexterity_exp_mult, 1],
       [
         "Agility Level ",
         Player.agility_mult,
         Player.agility_mult * mults.agility_mult,
-        BitNodeMultipliers.AgilityLevelMultiplier,
+        bitNodeMultipliers.AgilityLevelMultiplier,
       ],
       ["Agility Experience ", Player.agility_exp_mult, Player.agility_exp_mult * mults.agility_exp_mult, 1],
     ].map((data): MultiplierListItemData => (data as any).concat([Settings.theme.combat])),
@@ -149,7 +150,7 @@ export function PlayerMultipliers(): React.ReactElement {
       "Charisma Level ",
       Player.charisma_mult,
       Player.charisma_mult * mults.charisma_mult,
-      BitNodeMultipliers.CharismaLevelMultiplier,
+      bitNodeMultipliers.CharismaLevelMultiplier,
       Settings.theme.cha,
     ],
     [
@@ -166,7 +167,7 @@ export function PlayerMultipliers(): React.ReactElement {
         "Hacknet Node production ",
         Player.hacknet_node_money_mult,
         Player.hacknet_node_money_mult * mults.hacknet_node_money_mult,
-        BitNodeMultipliers.HacknetNodeMoney,
+        bitNodeMultipliers.HacknetNodeMoney,
       ],
       [
         "Hacknet Node purchase cost ",
@@ -197,14 +198,14 @@ export function PlayerMultipliers(): React.ReactElement {
         "Faction reputation gain ",
         Player.faction_rep_mult,
         Player.faction_rep_mult * mults.faction_rep_mult,
-        BitNodeMultipliers.FactionWorkRepGain,
+        bitNodeMultipliers.FactionWorkRepGain,
       ],
     ].map((data): MultiplierListItemData => (data as any).concat([Settings.theme.primary])),
     [
       "Salary ",
       Player.work_money_mult,
       Player.work_money_mult * mults.work_money_mult,
-      BitNodeMultipliers.CompanyWorkMoney,
+      bitNodeMultipliers.CompanyWorkMoney,
       Settings.theme.money,
     ],
     [
@@ -218,7 +219,7 @@ export function PlayerMultipliers(): React.ReactElement {
       "Crime money ",
       Player.crime_money_mult,
       Player.crime_money_mult * mults.crime_money_mult,
-      BitNodeMultipliers.CrimeMoney,
+      bitNodeMultipliers.CrimeMoney,
       Settings.theme.money,
     ],
   ];

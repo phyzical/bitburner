@@ -21,7 +21,7 @@ import { exceptionAlert } from "../utils/helpers/exceptionAlert";
 import { getRandomInt } from "../utils/helpers/getRandomInt";
 import { BladeburnerConstants } from "./data/Constants";
 import { numeralWrapper } from "../ui/numeralFormat";
-import { BitNodeMultipliers } from "../BitNode/BitNodeMultipliers";
+import { getBitNodeMultipliers } from "../BitNode/BitNodeMultipliers";
 import { addOffset } from "../utils/helpers/addOffset";
 import { Faction } from "../Faction/Faction";
 import { Factions, factionExists } from "../Faction/Factions";
@@ -1239,6 +1239,7 @@ export class Bladeburner implements IBladeburner {
   }
 
   completeAction(router: IRouter, player: IPlayer): void {
+    const bitNodeMultipliers = getBitNodeMultipliers(player);
     switch (this.action.type) {
       case ActionTypes["Contract"]:
       case ActionTypes["Operation"]: {
@@ -1279,7 +1280,7 @@ export class Bladeburner implements IBladeburner {
               action.setMaxLevel(BladeburnerConstants.ContractSuccessesPerLevel);
             }
             if (action.rankGain) {
-              const gain = addOffset(action.rankGain * rewardMultiplier * BitNodeMultipliers.BladeburnerRank, 10);
+              const gain = addOffset(action.rankGain * rewardMultiplier * bitNodeMultipliers.BladeburnerRank, 10);
               this.changeRank(player, gain);
               if (isOperation && this.logging.ops) {
                 this.log(action.name + " successfully completed! Gained " + formatNumber(gain, 3) + " rank");
@@ -1364,7 +1365,7 @@ export class Bladeburner implements IBladeburner {
             this.blackops[action.name] = true;
             let rankGain = 0;
             if (action.rankGain) {
-              rankGain = addOffset(action.rankGain * BitNodeMultipliers.BladeburnerRank, 10);
+              rankGain = addOffset(action.rankGain * bitNodeMultipliers.BladeburnerRank, 10);
               this.changeRank(player, rankGain);
             }
             teamLossMax = Math.ceil(teamCount / 2);
@@ -1468,7 +1469,7 @@ export class Bladeburner implements IBladeburner {
         }
         const hackingExpGain = 20 * player.hacking_exp_mult;
         const charismaExpGain = 20 * player.charisma_exp_mult;
-        const rankGain = 0.1 * BitNodeMultipliers.BladeburnerRank;
+        const rankGain = 0.1 * bitNodeMultipliers.BladeburnerRank;
         player.gainHackingExp(hackingExpGain);
         player.gainIntelligenceExp(BladeburnerConstants.BaseIntGain);
         player.gainCharismaExp(charismaExpGain);

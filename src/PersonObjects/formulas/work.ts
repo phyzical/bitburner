@@ -1,5 +1,5 @@
 import { CONSTANTS } from "../../Constants";
-import { BitNodeMultipliers } from "../../BitNode/BitNodeMultipliers";
+import { getBitNodeMultipliers } from "../../BitNode/BitNodeMultipliers";
 import { IPlayer } from "../IPlayer";
 
 export interface WorkEarnings {
@@ -68,13 +68,14 @@ export function calculateClassEarnings(player: IPlayer): WorkEarnings {
     default:
       throw new Error("ERR: Invalid/unrecognized class name");
   }
+  const bitNodeMultipliers = getBitNodeMultipliers(player);
   return {
     workMoneyLossRate: cost,
-    workHackExpGainRate: hackExp * player.hacking_exp_mult * BitNodeMultipliers.ClassGymExpGain,
-    workStrExpGainRate: strExp * player.strength_exp_mult * BitNodeMultipliers.ClassGymExpGain,
-    workDefExpGainRate: defExp * player.defense_exp_mult * BitNodeMultipliers.ClassGymExpGain,
-    workDexExpGainRate: dexExp * player.dexterity_exp_mult * BitNodeMultipliers.ClassGymExpGain,
-    workAgiExpGainRate: agiExp * player.agility_exp_mult * BitNodeMultipliers.ClassGymExpGain,
-    workChaExpGainRate: chaExp * player.charisma_exp_mult * BitNodeMultipliers.ClassGymExpGain,
+    workHackExpGainRate: hackExp * player.hacking_exp_mult * bitNodeMultipliers.ClassGymExpGain,
+    workStrExpGainRate: strExp * player.strength_exp_mult * bitNodeMultipliers.ClassGymExpGain,
+    workDefExpGainRate: defExp * player.defense_exp_mult * bitNodeMultipliers.ClassGymExpGain,
+    workDexExpGainRate: dexExp * player.dexterity_exp_mult * bitNodeMultipliers.ClassGymExpGain,
+    workAgiExpGainRate: agiExp * player.agility_exp_mult * bitNodeMultipliers.ClassGymExpGain,
+    workChaExpGainRate: chaExp * player.charisma_exp_mult * bitNodeMultipliers.ClassGymExpGain,
   };
 }

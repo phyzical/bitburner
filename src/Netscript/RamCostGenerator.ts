@@ -1,4 +1,4 @@
-import { IPlayer } from "src/PersonObjects/IPlayer";
+import { IPlayer } from "../PersonObjects/IPlayer";
 import { IMap } from "../types";
 
 // TODO remember to update RamCalculations.js and WorkerScript.js

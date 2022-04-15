@@ -10,7 +10,8 @@ import { getRandomInt } from "../utils/helpers/getRandomInt";
 import { Reviver } from "../utils/JSONReviver";
 import { isValidIPAddress } from "../utils/helpers/isValidIPAddress";
 import { SpecialServers } from "./data/SpecialServers";
-import { BitNodeMultipliers } from "../BitNode/BitNodeMultipliers";
+import { getBitNodeMultipliers } from "../BitNode/BitNodeMultipliers";
+import { Player } from "../Player";
 
 /**
  * Map of all Servers that exist in the game
@@ -166,7 +167,7 @@ export function initForeignServers(homeComputer: Server): void {
     }
 
     if (server.hostname === SpecialServers.WorldDaemon) {
-      server.requiredHackingSkill *= BitNodeMultipliers.WorldDaemonDifficulty;
+      server.requiredHackingSkill *= getBitNodeMultipliers(Player).WorldDaemonDifficulty;
     }
     AddToAllServers(server);
     if (metadata.networkLayer !== undefined) {

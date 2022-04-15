@@ -13,7 +13,7 @@ import { Person, ITaskTracker, createTaskTracker } from "../Person";
 
 import { Augmentation } from "../../Augmentation/Augmentation";
 
-import { BitNodeMultipliers } from "../../BitNode/BitNodeMultipliers";
+import { getBitNodeMultipliers } from "../../BitNode/BitNodeMultipliers";
 
 import { Crime } from "../../Crime/Crime";
 import { Crimes } from "../../Crime/Crimes";
@@ -153,14 +153,14 @@ export class Sleeve extends Person {
     } else {
       this.resetTaskStatus();
     }
-
-    this.gainRatesForTask.hack = crime.hacking_exp * this.hacking_exp_mult * BitNodeMultipliers.CrimeExpGain;
-    this.gainRatesForTask.str = crime.strength_exp * this.strength_exp_mult * BitNodeMultipliers.CrimeExpGain;
-    this.gainRatesForTask.def = crime.defense_exp * this.defense_exp_mult * BitNodeMultipliers.CrimeExpGain;
-    this.gainRatesForTask.dex = crime.dexterity_exp * this.dexterity_exp_mult * BitNodeMultipliers.CrimeExpGain;
-    this.gainRatesForTask.agi = crime.agility_exp * this.agility_exp_mult * BitNodeMultipliers.CrimeExpGain;
-    this.gainRatesForTask.cha = crime.charisma_exp * this.charisma_exp_mult * BitNodeMultipliers.CrimeExpGain;
-    this.gainRatesForTask.money = crime.money * this.crime_money_mult * BitNodeMultipliers.CrimeMoney;
+    const bitNodeMultipliers = getBitNodeMultipliers(p);
+    this.gainRatesForTask.hack = crime.hacking_exp * this.hacking_exp_mult * bitNodeMultipliers.CrimeExpGain;
+    this.gainRatesForTask.str = crime.strength_exp * this.strength_exp_mult * bitNodeMultipliers.CrimeExpGain;
+    this.gainRatesForTask.def = crime.defense_exp * this.defense_exp_mult * bitNodeMultipliers.CrimeExpGain;
+    this.gainRatesForTask.dex = crime.dexterity_exp * this.dexterity_exp_mult * bitNodeMultipliers.CrimeExpGain;
+    this.gainRatesForTask.agi = crime.agility_exp * this.agility_exp_mult * bitNodeMultipliers.CrimeExpGain;
+    this.gainRatesForTask.cha = crime.charisma_exp * this.charisma_exp_mult * bitNodeMultipliers.CrimeExpGain;
+    this.gainRatesForTask.money = crime.money * this.crime_money_mult * bitNodeMultipliers.CrimeMoney;
 
     this.currentTaskLocation = String(this.gainRatesForTask.money);
 
@@ -812,41 +812,43 @@ export class Sleeve extends Person {
     if (companyPosition == null) {
       return false;
     }
+    const bitNodeMultipliers = getBitNodeMultipliers(p);
+
     this.gainRatesForTask.money =
       companyPosition.baseSalary *
       company.salaryMultiplier *
       this.work_money_mult *
-      BitNodeMultipliers.CompanyWorkMoney;
+      bitNodeMultipliers.CompanyWorkMoney;
     this.gainRatesForTask.hack =
       companyPosition.hackingExpGain *
       company.expMultiplier *
       this.hacking_exp_mult *
-      BitNodeMultipliers.CompanyWorkExpGain;
+      bitNodeMultipliers.CompanyWorkExpGain;
     this.gainRatesForTask.str =
       companyPosition.strengthExpGain *
       company.expMultiplier *
       this.strength_exp_mult *
-      BitNodeMultipliers.CompanyWorkExpGain;
+      bitNodeMultipliers.CompanyWorkExpGain;
     this.gainRatesForTask.def =
       companyPosition.defenseExpGain *
       company.expMultiplier *
       this.defense_exp_mult *
-      BitNodeMultipliers.CompanyWorkExpGain;
+      bitNodeMultipliers.CompanyWorkExpGain;
     this.gainRatesForTask.dex =
       companyPosition.dexterityExpGain *
       company.expMultiplier *
       this.dexterity_exp_mult *
-      BitNodeMultipliers.CompanyWorkExpGain;
+      bitNodeMultipliers.CompanyWorkExpGain;
     this.gainRatesForTask.agi =
       companyPosition.agilityExpGain *
       company.expMultiplier *
       this.agility_exp_mult *
-      BitNodeMultipliers.CompanyWorkExpGain;
+      bitNodeMultipliers.CompanyWorkExpGain;
     this.gainRatesForTask.cha =
       companyPosition.charismaExpGain *
       company.expMultiplier *
       this.charisma_exp_mult *
-      BitNodeMultipliers.CompanyWorkExpGain;
+      bitNodeMultipliers.CompanyWorkExpGain;
 
     this.currentTaskLocation = companyName;
     this.currentTask = SleeveTaskType.Company;
@@ -871,6 +873,7 @@ export class Sleeve extends Person {
     }
 
     const factionInfo = faction.getInfo();
+    const bitNodeMultipliers = getBitNodeMultipliers(p);
 
     // Set type of work (hacking/field/security), and the experience gains
     const sanitizedWorkType: string = workType.toLowerCase();
@@ -879,28 +882,28 @@ export class Sleeve extends Person {
         return false;
       }
       this.factionWorkType = FactionWorkType.Hacking;
-      this.gainRatesForTask.hack = 0.15 * this.hacking_exp_mult * BitNodeMultipliers.FactionWorkExpGain;
+      this.gainRatesForTask.hack = 0.15 * this.hacking_exp_mult * bitNodeMultipliers.FactionWorkExpGain;
     } else if (sanitizedWorkType.includes("field")) {
       if (!factionInfo.offerFieldWork) {
         return false;
       }
       this.factionWorkType = FactionWorkType.Field;
-      this.gainRatesForTask.hack = 0.1 * this.hacking_exp_mult * BitNodeMultipliers.FactionWorkExpGain;
-      this.gainRatesForTask.str = 0.1 * this.strength_exp_mult * BitNodeMultipliers.FactionWorkExpGain;
-      this.gainRatesForTask.def = 0.1 * this.defense_exp_mult * BitNodeMultipliers.FactionWorkExpGain;
-      this.gainRatesForTask.dex = 0.1 * this.dexterity_exp_mult * BitNodeMultipliers.FactionWorkExpGain;
-      this.gainRatesForTask.agi = 0.1 * this.agility_exp_mult * BitNodeMultipliers.FactionWorkExpGain;
-      this.gainRatesForTask.cha = 0.1 * this.charisma_exp_mult * BitNodeMultipliers.FactionWorkExpGain;
+      this.gainRatesForTask.hack = 0.1 * this.hacking_exp_mult * bitNodeMultipliers.FactionWorkExpGain;
+      this.gainRatesForTask.str = 0.1 * this.strength_exp_mult * bitNodeMultipliers.FactionWorkExpGain;
+      this.gainRatesForTask.def = 0.1 * this.defense_exp_mult * bitNodeMultipliers.FactionWorkExpGain;
+      this.gainRatesForTask.dex = 0.1 * this.dexterity_exp_mult * bitNodeMultipliers.FactionWorkExpGain;
+      this.gainRatesForTask.agi = 0.1 * this.agility_exp_mult * bitNodeMultipliers.FactionWorkExpGain;
+      this.gainRatesForTask.cha = 0.1 * this.charisma_exp_mult * bitNodeMultipliers.FactionWorkExpGain;
     } else if (sanitizedWorkType.includes("security")) {
       if (!factionInfo.offerSecurityWork) {
         return false;
       }
       this.factionWorkType = FactionWorkType.Security;
-      this.gainRatesForTask.hack = 0.1 * this.hacking_exp_mult * BitNodeMultipliers.FactionWorkExpGain;
-      this.gainRatesForTask.str = 0.15 * this.strength_exp_mult * BitNodeMultipliers.FactionWorkExpGain;
-      this.gainRatesForTask.def = 0.15 * this.defense_exp_mult * BitNodeMultipliers.FactionWorkExpGain;
-      this.gainRatesForTask.dex = 0.15 * this.dexterity_exp_mult * BitNodeMultipliers.FactionWorkExpGain;
-      this.gainRatesForTask.agi = 0.15 * this.agility_exp_mult * BitNodeMultipliers.FactionWorkExpGain;
+      this.gainRatesForTask.hack = 0.1 * this.hacking_exp_mult * bitNodeMultipliers.FactionWorkExpGain;
+      this.gainRatesForTask.str = 0.15 * this.strength_exp_mult * bitNodeMultipliers.FactionWorkExpGain;
+      this.gainRatesForTask.def = 0.15 * this.defense_exp_mult * bitNodeMultipliers.FactionWorkExpGain;
+      this.gainRatesForTask.dex = 0.15 * this.dexterity_exp_mult * bitNodeMultipliers.FactionWorkExpGain;
+      this.gainRatesForTask.agi = 0.15 * this.agility_exp_mult * bitNodeMultipliers.FactionWorkExpGain;
     } else {
       return false;
     }

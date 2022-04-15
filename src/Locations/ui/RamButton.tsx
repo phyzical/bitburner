@@ -11,7 +11,7 @@ import { Money } from "../../ui/React/Money";
 import { numeralWrapper } from "../../ui/numeralFormat";
 
 import { MathJaxWrapper } from "../../MathJaxWrapper";
-import { BitNodeMultipliers } from "../../BitNode/BitNodeMultipliers";
+import { getBitNodeMultipliers } from "../../BitNode/BitNodeMultipliers";
 
 type IProps = {
   p: IPlayer;
@@ -30,9 +30,9 @@ export function RamButton(props: IProps): React.ReactElement {
     purchaseRamForHomeComputer(props.p);
     props.rerender();
   }
+  const bitNodeMultipliers = getBitNodeMultipliers(props.p);
 
-  const bnMult = BitNodeMultipliers.HomeComputerRamCost === 1 ? "" : `\\cdot ${BitNodeMultipliers.HomeComputerRamCost}`;
-  console.log(BitNodeMultipliers.HomeComputerRamCost);
+  const bnMult = bitNodeMultipliers.HomeComputerRamCost === 1 ? "" : `\\cdot ${bitNodeMultipliers.HomeComputerRamCost}`;
   return (
     <Tooltip
       title={

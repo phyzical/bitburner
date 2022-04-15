@@ -2,7 +2,7 @@ import { Paper, Table, TableBody, Box, IconButton, Typography, Container, Toolti
 import { MoreHoriz, Info } from "@mui/icons-material";
 import React, { useEffect, useState } from "react";
 import { BitNodes } from "../BitNode/BitNode";
-import { BitNodeMultipliers } from "../BitNode/BitNodeMultipliers";
+import { getBitNodeMultipliers } from "../BitNode/BitNodeMultipliers";
 import { HacknetServerConstants } from "../Hacknet/data/Constants";
 import { getPurchaseServerLimit } from "../Server/ServerPurchases";
 import { Settings } from "../Settings/Settings";
@@ -220,6 +220,8 @@ export function CharacterStats(): React.ReactElement {
   }
   timeRows.push(["Total", convertTimeMsToTimeElapsedString(player.totalPlaytime)]);
 
+  const bitNodeMultipliers = getBitNodeMultipliers(player);
+
   return (
     <Container maxWidth="lg" disableGutters sx={{ mx: 0 }}>
       <Typography variant="h4">Stats</Typography>
@@ -367,12 +369,12 @@ export function CharacterStats(): React.ReactElement {
                   [
                     "Hacking Money",
                     player.hacking_money_mult,
-                    player.hacking_money_mult * BitNodeMultipliers.ScriptHackMoney,
+                    player.hacking_money_mult * bitNodeMultipliers.ScriptHackMoney,
                   ],
                   [
                     "Hacking Growth",
                     player.hacking_grow_mult,
-                    player.hacking_grow_mult * BitNodeMultipliers.ServerGrowthRate,
+                    player.hacking_grow_mult * bitNodeMultipliers.ServerGrowthRate,
                   ],
                 ]}
                 color={Settings.theme.hack}
@@ -382,12 +384,12 @@ export function CharacterStats(): React.ReactElement {
                   [
                     "Hacking Level",
                     player.hacking_mult,
-                    player.hacking_mult * BitNodeMultipliers.HackingLevelMultiplier,
+                    player.hacking_mult * bitNodeMultipliers.HackingLevelMultiplier,
                   ],
                   [
                     "Hacking Experience",
                     player.hacking_exp_mult,
-                    player.hacking_exp_mult * BitNodeMultipliers.HackExpGain,
+                    player.hacking_exp_mult * bitNodeMultipliers.HackExpGain,
                   ],
                 ]}
                 color={Settings.theme.hack}
@@ -397,7 +399,7 @@ export function CharacterStats(): React.ReactElement {
                   [
                     "Strength Level",
                     player.strength_mult,
-                    player.strength_mult * BitNodeMultipliers.StrengthLevelMultiplier,
+                    player.strength_mult * bitNodeMultipliers.StrengthLevelMultiplier,
                   ],
                   ["Strength Experience", player.strength_exp_mult],
                 ]}
@@ -408,7 +410,7 @@ export function CharacterStats(): React.ReactElement {
                   [
                     "Defense Level",
                     player.defense_mult,
-                    player.defense_mult * BitNodeMultipliers.DefenseLevelMultiplier,
+                    player.defense_mult * bitNodeMultipliers.DefenseLevelMultiplier,
                   ],
                   ["Defense Experience", player.defense_exp_mult],
                 ]}
@@ -419,7 +421,7 @@ export function CharacterStats(): React.ReactElement {
                   [
                     "Dexterity Level",
                     player.dexterity_mult,
-                    player.dexterity_mult * BitNodeMultipliers.DexterityLevelMultiplier,
+                    player.dexterity_mult * bitNodeMultipliers.DexterityLevelMultiplier,
                   ],
                   ["Dexterity Experience", player.dexterity_exp_mult],
                 ]}
@@ -430,7 +432,7 @@ export function CharacterStats(): React.ReactElement {
                   [
                     "Agility Level",
                     player.agility_mult,
-                    player.agility_mult * BitNodeMultipliers.AgilityLevelMultiplier,
+                    player.agility_mult * bitNodeMultipliers.AgilityLevelMultiplier,
                   ],
                   ["Agility Experience", player.agility_exp_mult],
                 ]}
@@ -441,7 +443,7 @@ export function CharacterStats(): React.ReactElement {
                   [
                     "Charisma Level",
                     player.charisma_mult,
-                    player.charisma_mult * BitNodeMultipliers.CharismaLevelMultiplier,
+                    player.charisma_mult * bitNodeMultipliers.CharismaLevelMultiplier,
                   ],
                   ["Charisma Experience", player.charisma_exp_mult],
                 ]}
@@ -456,7 +458,7 @@ export function CharacterStats(): React.ReactElement {
                   [
                     "Hacknet Node production",
                     player.hacknet_node_money_mult,
-                    player.hacknet_node_money_mult * BitNodeMultipliers.HacknetNodeMoney,
+                    player.hacknet_node_money_mult * bitNodeMultipliers.HacknetNodeMoney,
                   ],
                   ["Hacknet Node purchase cost", player.hacknet_node_purchase_cost_mult],
                   ["Hacknet Node RAM upgrade cost", player.hacknet_node_ram_cost_mult],
@@ -471,16 +473,16 @@ export function CharacterStats(): React.ReactElement {
                   [
                     "Faction reputation gain",
                     player.faction_rep_mult,
-                    player.faction_rep_mult * BitNodeMultipliers.FactionWorkRepGain,
+                    player.faction_rep_mult * bitNodeMultipliers.FactionWorkRepGain,
                   ],
-                  ["Salary", player.work_money_mult, player.work_money_mult * BitNodeMultipliers.CompanyWorkMoney],
+                  ["Salary", player.work_money_mult, player.work_money_mult * bitNodeMultipliers.CompanyWorkMoney],
                 ]}
                 color={Settings.theme.money}
               />
               <MultiplierTable
                 rows={[
                   ["Crime success", player.crime_success_mult],
-                  ["Crime money", player.crime_money_mult, player.crime_money_mult * BitNodeMultipliers.CrimeMoney],
+                  ["Crime money", player.crime_money_mult, player.crime_money_mult * bitNodeMultipliers.CrimeMoney],
                 ]}
                 color={Settings.theme.combat}
               />

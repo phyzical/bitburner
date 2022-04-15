@@ -12,7 +12,7 @@ import { Option } from "./Option";
 
 import { CONSTANTS } from "../../Constants";
 
-import { BitNodeMultipliers } from "../../BitNode/BitNodeMultipliers";
+import { getBitNodeMultipliers } from "../../BitNode/BitNodeMultipliers";
 import { Faction } from "../Faction";
 
 import { use } from "../../ui/Context";
@@ -100,7 +100,7 @@ function MainPage({ faction, rerender, onAugmentations }: IMainProps): React.Rea
 
   // Flags for whether special options (gang, sleeve purchases, donate, etc.)
   // should be shown
-  const favorToDonate = Math.floor(CONSTANTS.BaseFavorToDonate * BitNodeMultipliers.RepToDonateToFaction);
+  const favorToDonate = Math.floor(CONSTANTS.BaseFavorToDonate * getBitNodeMultipliers(player).RepToDonateToFaction);
   const canDonate = faction.favor >= favorToDonate;
 
   const canPurchaseSleeves = faction.name === FactionNames.TheCovenant && player.bitNodeN === 10;

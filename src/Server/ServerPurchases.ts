@@ -5,12 +5,13 @@
 import { AddToAllServers, createUniqueRandomIp } from "./AllServers";
 import { safetlyCreateUniqueServer } from "./ServerHelpers";
 
-import { BitNodeMultipliers } from "../BitNode/BitNodeMultipliers";
+import { getBitNodeMultipliers } from "../BitNode/BitNodeMultipliers";
 import { CONSTANTS } from "../Constants";
 import { IPlayer } from "../PersonObjects/IPlayer";
 
 import { dialogBoxCreate } from "../ui/React/DialogBox";
 import { isPowerOfTwo } from "../utils/helpers/isPowerOfTwo";
+import { Player } from "../Player";
 
 // Returns the cost of purchasing a server with the given RAM
 // Returns Infinity for invalid 'ram' arguments
@@ -30,20 +31,22 @@ export function getPurchaseServerCost(ram: number): number {
 
   const upg = Math.max(0, Math.log(sanitizedRam) / Math.log(2) - 6);
 
+  const bitNodeMultipliers = getBitNodeMultipliers(Player);
+
   return (
     sanitizedRam *
     CONSTANTS.BaseCostFor1GBOfRamServer *
-    BitNodeMultipliers.PurchasedServerCost *
-    Math.pow(BitNodeMultipliers.PurchasedServerSoftcap, upg)
+    bitNodeMultipliers.PurchasedServerCost *
+    Math.pow(bitNodeMultipliers.PurchasedServerSoftcap, upg)
   );
 }
 
 export function getPurchaseServerLimit(): number {
-  return Math.round(CONSTANTS.PurchasedServerLimit * BitNodeMultipliers.PurchasedServerLimit);
+  return Math.round(CONSTANTS.PurchasedServerLimit * getBitNodeMultipliers(Player).PurchasedServerLimit);
 }
 
 export function getPurchaseServerMaxRam(): number {
-  const ram = Math.round(CONSTANTS.PurchasedServerMaxRam * BitNodeMultipliers.PurchasedServerMaxRam);
+  const ram = Math.round(CONSTANTS.PurchasedServerMaxRam * getBitNodeMultipliers(Player).PurchasedServerMaxRam);
 
   // Round this to the nearest power of 2
   return 1 << (31 - Math.clz32(ram));

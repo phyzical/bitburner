@@ -1,4 +1,4 @@
-import { BitNodeMultipliers } from "./BitNode/BitNodeMultipliers";
+import { getBitNodeMultipliers } from "./BitNode/BitNodeMultipliers";
 import { IPlayer } from "./PersonObjects/IPlayer";
 import { calculateIntelligenceBonus } from "./PersonObjects/formulas/intelligence";
 import { Server } from "./Server/Server";
@@ -36,7 +36,7 @@ export function calculateHackingExpGain(server: Server, player: IPlayer): number
   let expGain = baseExpGain;
   expGain += server.baseDifficulty * diffFactor;
 
-  return expGain * player.hacking_exp_mult * BitNodeMultipliers.HackExpGain;
+  return expGain * player.hacking_exp_mult * getBitNodeMultipliers(player).HackExpGain;
 }
 
 /**
@@ -50,7 +50,8 @@ export function calculatePercentMoneyHacked(server: Server, player: IPlayer): nu
   const difficultyMult = (100 - server.hackDifficulty) / 100;
   const skillMult = (player.hacking - (server.requiredHackingSkill - 1)) / player.hacking;
   const percentMoneyHacked =
-    (difficultyMult * skillMult * player.hacking_money_mult * BitNodeMultipliers.ScriptHackMoney) / balanceFactor;
+    (difficultyMult * skillMult * player.hacking_money_mult * getBitNodeMultipliers(player).ScriptHackMoney) /
+    balanceFactor;
   if (percentMoneyHacked < 0) {
     return 0;
   }

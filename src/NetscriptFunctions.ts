@@ -3,7 +3,7 @@ import { vsprintf, sprintf } from "sprintf-js";
 import { getRamCost } from "./Netscript/RamCostGenerator";
 import { WorkerScriptStartStopEventEmitter } from "./Netscript/WorkerScriptStartStopEventEmitter";
 
-import { BitNodeMultipliers } from "./BitNode/BitNodeMultipliers";
+import { getBitNodeMultipliers } from "./BitNode/BitNodeMultipliers";
 
 import { CONSTANTS } from "./Constants";
 
@@ -420,7 +420,7 @@ export function NetscriptFunctions(workerScript: WorkerScript): NS {
           server.moneyAvailable = 0;
         }
 
-        const moneyGained = moneyDrained * BitNodeMultipliers.ScriptHackMoneyGain;
+        const moneyGained = moneyDrained * getBitNodeMultipliers(Player).ScriptHackMoneyGain;
 
         Player.gainMoney(moneyGained, "hacking");
         workerScript.scriptRef.onlineMoneyMade += moneyGained;
@@ -838,7 +838,7 @@ export function NetscriptFunctions(workerScript: WorkerScript): NS {
       const threads = helper.number("weakenAnalyze", "threads", _threads);
       const cores = helper.number("weakenAnalyze", "cores", _cores);
       const coreBonus = 1 + (cores - 1) / 16;
-      return CONSTANTS.ServerWeakenAmount * threads * coreBonus * BitNodeMultipliers.ServerWeakenRate;
+      return CONSTANTS.ServerWeakenAmount * threads * coreBonus * getBitNodeMultipliers(Player).ServerWeakenRate;
     },
     share: async function (): Promise<void> {
       updateDynamicRam("share", getRamCost(Player, "share"));
@@ -1550,13 +1550,12 @@ export function NetscriptFunctions(workerScript: WorkerScript): NS {
         levelCost: Player.hacknet_node_level_cost_mult,
       };
     },
-    getBitNodeMultipliers: function (): IBNMults {
+    getBitNodeMultipliers: function (bitNode?: number): IBNMults {
       updateDynamicRam("getBitNodeMultipliers", getRamCost(Player, "getBitNodeMultipliers"));
       if (Player.sourceFileLvl(5) <= 0 && Player.bitNodeN !== 5) {
         throw makeRuntimeErrorMsg("getBitNodeMultipliers", "Requires Source-File 5 to run.");
       }
-      const copy = Object.assign({}, BitNodeMultipliers);
-      return copy;
+      return getBitNodeMultipliers(Player, bitNode);
     },
     getServer: function (_hostname: unknown = workerScript.hostname): IServerDef {
       updateDynamicRam("getServer", getRamCost(Player, "getServer"));
@@ -2395,7 +2394,7 @@ export function NetscriptFunctions(workerScript: WorkerScript): NS {
     },
     getFavorToDonate: function (): number {
       updateDynamicRam("getFavorToDonate", getRamCost(Player, "getFavorToDonate"));
-      return Math.floor(CONSTANTS.BaseFavorToDonate * BitNodeMultipliers.RepToDonateToFaction);
+      return Math.floor(CONSTANTS.BaseFavorToDonate * getBitNodeMultipliers(Player).RepToDonateToFaction);
     },
     getOwnedSourceFiles: function (): SourceFileLvl[] {
       updateDynamicRam("getOwnedSourceFiles", getRamCost(Player, "getOwnedSourceFiles"));

@@ -1,4 +1,4 @@
-import { PlayerObject } from "src/PersonObjects/Player/PlayerObject";
+import { PlayerObject } from "../PersonObjects/Player/PlayerObject";
 import { AugmentationNames } from "../Augmentation/data/AugmentationNames";
 import { SkillNames } from "../Bladeburner/data/SkillNames";
 import { Skills } from "../Bladeburner/Skills";

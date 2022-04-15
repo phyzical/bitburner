@@ -4,7 +4,6 @@
 import { convertTimeMsToTimeElapsedString } from "./utils/StringHelperFunctions";
 import { initAugmentations } from "./Augmentation/AugmentationHelpers";
 import { AugmentationNames } from "./Augmentation/data/AugmentationNames";
-import { initBitNodeMultipliers } from "./BitNode/BitNode";
 import { Bladeburner } from "./Bladeburner/Bladeburner";
 import { generateRandomContract } from "./CodingContractGenerator";
 import { initCompanies } from "./Company/Companies";
@@ -219,7 +218,7 @@ const Engine: {
       }
     }
     if (Player.corporation instanceof Corporation) {
-      Player.corporation.process(Player);
+      Player.corporation.process();
     }
     if (Engine.Counters.mechanicProcess <= 0) {
       if (Player.bladeburner instanceof Bladeburner) {
@@ -253,7 +252,6 @@ const Engine: {
     if (loadGame(saveString)) {
       ThemeEvents.emit();
 
-      initBitNodeMultipliers(Player);
       initAugmentations(); // Also calls Player.reapplyAllAugmentations()
       Player.reapplyAllSourceFiles();
       if (Player.hasWseAccount) {
@@ -429,7 +427,6 @@ const Engine: {
       );
     } else {
       // No save found, start new game
-      initBitNodeMultipliers(Player);
       Engine.start(); // Run main game loop and Scripts loop
       Player.init();
       initForeignServers(Player.getHomeComputer());

@@ -10,7 +10,7 @@ import { StaneksGiftEvents } from "./StaneksGiftEvents";
 import { Generic_fromJSON, Generic_toJSON, Reviver } from "../utils/JSONReviver";
 import { CONSTANTS } from "../Constants";
 import { StanekConstants } from "./data/Constants";
-import { BitNodeMultipliers } from "../BitNode/BitNodeMultipliers";
+import { getBitNodeMultipliers } from "../BitNode/BitNodeMultipliers";
 import { Player } from "../Player";
 import { AugmentationNames } from "../Augmentation/data/AugmentationNames";
 
@@ -19,7 +19,7 @@ export class StaneksGift implements IStaneksGift {
   fragments: ActiveFragment[] = [];
 
   baseSize(): number {
-    return StanekConstants.BaseSize + BitNodeMultipliers.StaneksGiftExtraSize + Player.sourceFileLvl(13);
+    return StanekConstants.BaseSize + getBitNodeMultipliers(Player).StaneksGiftExtraSize + Player.sourceFileLvl(13);
   }
 
   width(): number {

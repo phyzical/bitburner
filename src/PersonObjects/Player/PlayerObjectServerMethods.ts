@@ -5,7 +5,7 @@ import { IPlayer } from "../IPlayer";
 
 import { CONSTANTS } from "../../Constants";
 
-import { BitNodeMultipliers } from "../../BitNode/BitNodeMultipliers";
+import { getBitNodeMultipliers } from "../../BitNode/BitNodeMultipliers";
 import { Server } from "../../Server/Server";
 import { BaseServer } from "../../Server/BaseServer";
 import { HacknetServer } from "../../Hacknet/HacknetServer";
@@ -36,7 +36,7 @@ export function getUpgradeHomeRamCost(this: IPlayer): number {
   //Calculate cost
   //Have cost increase by some percentage each time RAM has been upgraded
   const mult = Math.pow(1.58, numUpgrades);
-  const cost = currentRam * CONSTANTS.BaseCostFor1GBOfRamHome * mult * BitNodeMultipliers.HomeComputerRamCost;
+  const cost = currentRam * CONSTANTS.BaseCostFor1GBOfRamHome * mult * getBitNodeMultipliers(this).HomeComputerRamCost;
   return cost;
 }
 

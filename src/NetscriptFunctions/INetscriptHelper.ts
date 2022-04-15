@@ -1,4 +1,4 @@
-import { CityName } from "src/Locations/data/CityNames";
+import { CityName } from "../Locations/data/CityNames";
 import { BaseServer } from "../Server/BaseServer";
 
 export interface INetscriptHelper {

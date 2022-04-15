@@ -13,7 +13,7 @@ import { IPlayer } from "../PersonObjects/IPlayer";
 import { AugmentationNames } from "./data/AugmentationNames";
 import { CONSTANTS } from "../Constants";
 import { StaticAugmentations } from "./StaticAugmentations";
-import { BitNodeMultipliers } from "../BitNode/BitNodeMultipliers";
+import { getBitNodeMultipliers } from "../BitNode/BitNodeMultipliers";
 import { getBaseAugmentationPriceMultiplier, getGenericAugmentationPriceMultiplier } from "./AugmentationHelpers";
 import { initInfiltratorsAugmentations } from "./data/AugmentationCreator";
 
@@ -605,13 +605,14 @@ export class Augmentation {
     const augmentationReference = StaticAugmentations[this.name];
     let moneyCost = augmentationReference.baseCost;
     let repCost = augmentationReference.baseRepRequirement;
+    const bitNodeMultipliers = getBitNodeMultipliers(player)
 
     if (augmentationReference.name === AugmentationNames.NeuroFluxGovernor) {
       let nextLevel = this.getLevel(player);
       --nextLevel;
       const multiplier = Math.pow(CONSTANTS.NeuroFluxGovernorLevelMult, nextLevel);
-      repCost = augmentationReference.baseRepRequirement * multiplier * BitNodeMultipliers.AugmentationRepCost;
-      moneyCost = augmentationReference.baseCost * multiplier * BitNodeMultipliers.AugmentationMoneyCost;
+      repCost = augmentationReference.baseRepRequirement * multiplier * bitNodeMultipliers.AugmentationRepCost;
+      moneyCost = augmentationReference.baseCost * multiplier * bitNodeMultipliers.AugmentationMoneyCost;
 
       for (let i = 0; i < player.queuedAugmentations.length; ++i) {
         moneyCost *= getBaseAugmentationPriceMultiplier();
@@ -628,7 +629,7 @@ export class Augmentation {
       moneyCost =
         augmentationReference.baseCost *
         getGenericAugmentationPriceMultiplier() *
-        BitNodeMultipliers.AugmentationMoneyCost;
+        bitNodeMultipliers.AugmentationMoneyCost;
     }
     return { moneyCost, repCost };
   }

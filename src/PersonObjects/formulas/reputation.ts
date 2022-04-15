@@ -1,15 +1,16 @@
 import { IPlayer } from "../IPlayer";
 import { Faction } from "../../Faction/Faction";
 import { CONSTANTS } from "../../Constants";
-import { BitNodeMultipliers } from "../../BitNode/BitNodeMultipliers";
+import { getBitNodeMultipliers } from "../../BitNode/BitNodeMultipliers";
 import { CalculateShareMult } from "../../NetworkShare/Share";
+import { Player } from "../../Player";
 
 function mult(f: Faction): number {
   let favorMult = 1 + f.favor / 100;
   if (isNaN(favorMult)) {
     favorMult = 1;
   }
-  return favorMult * BitNodeMultipliers.FactionWorkRepGain;
+  return favorMult * getBitNodeMultipliers(Player).FactionWorkRepGain;
 }
 
 export function getHackingWorkRepGain(p: IPlayer, f: Faction): number {

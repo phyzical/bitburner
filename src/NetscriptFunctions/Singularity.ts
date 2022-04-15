@@ -34,7 +34,7 @@ import { Locations } from "../Locations/Locations";
 import { GetServer, AddToAllServers, createUniqueRandomIp } from "../Server/AllServers";
 import { Programs } from "../Programs/Programs";
 import { numeralWrapper } from "../ui/numeralFormat";
-import { BitNodeMultipliers } from "../BitNode/BitNodeMultipliers";
+import { getBitNodeMultipliers } from "../BitNode/BitNodeMultipliers";
 import { Company } from "../Company/Company";
 import { Companies } from "../Company/Companies";
 import { Factions, factionExists } from "../Faction/Factions";
@@ -47,7 +47,7 @@ import { calculateHackingTime } from "../Hacking";
 import { Server } from "../Server/Server";
 import { netscriptCanHack } from "../Hacking/netscriptCanHack";
 import { FactionInfos } from "../Faction/FactionInfo";
-import { InternalAPI, NetscriptContext } from "src/Netscript/APIWrapper";
+import { InternalAPI, NetscriptContext } from "../Netscript/APIWrapper";
 import { BlackOperationNames } from "../Bladeburner/data/BlackOperationNames";
 import { enterBitNode } from "../RedPill";
 
@@ -1179,7 +1179,9 @@ export function NetscriptSingularity(player: IPlayer, workerScript: WorkerScript
           );
           return false;
         }
-        const repNeededToDonate = Math.floor(CONSTANTS.BaseFavorToDonate * BitNodeMultipliers.RepToDonateToFaction);
+        const repNeededToDonate = Math.floor(
+          CONSTANTS.BaseFavorToDonate * getBitNodeMultipliers(player).RepToDonateToFaction,
+        );
         if (faction.favor < repNeededToDonate) {
           workerScript.log(
             "donateToFaction",

@@ -1,5 +1,5 @@
 import { IPlayer } from "../../PersonObjects/IPlayer";
-import { BitNodeMultipliers } from "../../BitNode/BitNodeMultipliers";
+import { getBitNodeMultipliers } from "../../BitNode/BitNodeMultipliers";
 import { LocationsMetadata } from "../../Locations/data/LocationsMetadata";
 
 export function calculateSellInformationCashReward(
@@ -16,7 +16,7 @@ export function calculateSellInformationCashReward(
     3e3 *
     levelBonus *
     player.infiltration_sell_mult *
-    BitNodeMultipliers.InfiltrationMoney
+    getBitNodeMultipliers(player).InfiltrationMoney
   );
 }
 
@@ -34,7 +34,7 @@ export function calculateTradeInformationRepReward(
     3e3 *
     levelBonus *
     player.infiltration_sell_mult *
-    BitNodeMultipliers.InfiltrationMoney
+    getBitNodeMultipliers(player).InfiltrationMoney
   );
 }
 

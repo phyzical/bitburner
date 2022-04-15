@@ -1,4 +1,5 @@
-import { BitNodeMultipliers } from "../../BitNode/BitNodeMultipliers";
+import { Player } from "../../Player";
+import { getBitNodeMultipliers } from "../../BitNode/BitNodeMultipliers";
 import { HacknetServerConstants } from "../data/Constants";
 
 export function calculateHashGainRate(
@@ -13,7 +14,7 @@ export function calculateHashGainRate(
   const coreMultiplier = 1 + (cores - 1) / 5;
   const ramRatio = 1 - ramUsed / maxRam;
 
-  return baseGain * ramMultiplier * coreMultiplier * ramRatio * mult * BitNodeMultipliers.HacknetNodeMoney;
+  return baseGain * ramMultiplier * coreMultiplier * ramRatio * mult * getBitNodeMultipliers(Player).HacknetNodeMoney;
 }
 
 export function calculateLevelUpgradeCost(startingLevel: number, extraLevels = 1, costMult = 1): number {

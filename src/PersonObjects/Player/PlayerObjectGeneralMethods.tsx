@@ -3,7 +3,7 @@ import { PlayerObject } from "./PlayerObject";
 import { applyAugmentation } from "../../Augmentation/AugmentationHelpers";
 import { PlayerOwnedAugmentation } from "../../Augmentation/PlayerOwnedAugmentation";
 import { AugmentationNames } from "../../Augmentation/data/AugmentationNames";
-import { BitNodeMultipliers } from "../../BitNode/BitNodeMultipliers";
+import { getBitNodeMultipliers } from "../../BitNode/BitNodeMultipliers";
 import { CodingContractRewardType, ICodingContractReward } from "../../CodingContracts";
 import { Company } from "../../Company/Company";
 import { Companies } from "../../Company/Companies";
@@ -236,31 +236,32 @@ export function calculateSkillProgress(this: IPlayer, exp: number, mult = 1): IS
 }
 
 export function updateSkillLevels(this: IPlayer): void {
+  const bitNodeMultipliers = getBitNodeMultipliers(this)
   this.hacking = Math.max(
     1,
-    Math.floor(this.calculateSkill(this.hacking_exp, this.hacking_mult * BitNodeMultipliers.HackingLevelMultiplier)),
+    Math.floor(this.calculateSkill(this.hacking_exp, this.hacking_mult * bitNodeMultipliers.HackingLevelMultiplier)),
   );
   this.strength = Math.max(
     1,
-    Math.floor(this.calculateSkill(this.strength_exp, this.strength_mult * BitNodeMultipliers.StrengthLevelMultiplier)),
+    Math.floor(this.calculateSkill(this.strength_exp, this.strength_mult * bitNodeMultipliers.StrengthLevelMultiplier)),
   );
   this.defense = Math.max(
     1,
-    Math.floor(this.calculateSkill(this.defense_exp, this.defense_mult * BitNodeMultipliers.DefenseLevelMultiplier)),
+    Math.floor(this.calculateSkill(this.defense_exp, this.defense_mult * bitNodeMultipliers.DefenseLevelMultiplier)),
   );
   this.dexterity = Math.max(
     1,
     Math.floor(
-      this.calculateSkill(this.dexterity_exp, this.dexterity_mult * BitNodeMultipliers.DexterityLevelMultiplier),
+      this.calculateSkill(this.dexterity_exp, this.dexterity_mult * bitNodeMultipliers.DexterityLevelMultiplier),
     ),
   );
   this.agility = Math.max(
     1,
-    Math.floor(this.calculateSkill(this.agility_exp, this.agility_mult * BitNodeMultipliers.AgilityLevelMultiplier)),
+    Math.floor(this.calculateSkill(this.agility_exp, this.agility_mult * bitNodeMultipliers.AgilityLevelMultiplier)),
   );
   this.charisma = Math.max(
     1,
-    Math.floor(this.calculateSkill(this.charisma_exp, this.charisma_mult * BitNodeMultipliers.CharismaLevelMultiplier)),
+    Math.floor(this.calculateSkill(this.charisma_exp, this.charisma_mult * bitNodeMultipliers.CharismaLevelMultiplier)),
   );
 
   if (this.intelligence > 0) {
@@ -394,7 +395,7 @@ export function gainHackingExp(this: IPlayer, exp: number): void {
     this.hacking_exp = 0;
   }
 
-  this.hacking = calculateSkillF(this.hacking_exp, this.hacking_mult * BitNodeMultipliers.HackingLevelMultiplier);
+  this.hacking = calculateSkillF(this.hacking_exp, this.hacking_mult *  getBitNodeMultipliers(this).HackingLevelMultiplier);
 }
 
 export function gainStrengthExp(this: IPlayer, exp: number): void {
@@ -407,7 +408,7 @@ export function gainStrengthExp(this: IPlayer, exp: number): void {
     this.strength_exp = 0;
   }
 
-  this.strength = calculateSkillF(this.strength_exp, this.strength_mult * BitNodeMultipliers.StrengthLevelMultiplier);
+  this.strength = calculateSkillF(this.strength_exp, this.strength_mult * getBitNodeMultipliers(this).StrengthLevelMultiplier);
 }
 
 export function gainDefenseExp(this: IPlayer, exp: number): void {
@@ -420,7 +421,7 @@ export function gainDefenseExp(this: IPlayer, exp: number): void {
     this.defense_exp = 0;
   }
 
-  this.defense = calculateSkillF(this.defense_exp, this.defense_mult * BitNodeMultipliers.DefenseLevelMultiplier);
+  this.defense = calculateSkillF(this.defense_exp, this.defense_mult * getBitNodeMultipliers(this).DefenseLevelMultiplier);
   const ratio = this.hp / this.max_hp;
   this.max_hp = Math.floor(10 + this.defense / 10);
   this.hp = Math.round(this.max_hp * ratio);
@@ -438,7 +439,7 @@ export function gainDexterityExp(this: IPlayer, exp: number): void {
 
   this.dexterity = calculateSkillF(
     this.dexterity_exp,
-    this.dexterity_mult * BitNodeMultipliers.DexterityLevelMultiplier,
+    this.dexterity_mult * getBitNodeMultipliers(this).DexterityLevelMultiplier,
   );
 }
 
@@ -452,7 +453,7 @@ export function gainAgilityExp(this: IPlayer, exp: number): void {
     this.agility_exp = 0;
   }
 
-  this.agility = calculateSkillF(this.agility_exp, this.agility_mult * BitNodeMultipliers.AgilityLevelMultiplier);
+  this.agility = calculateSkillF(this.agility_exp, this.agility_mult * getBitNodeMultipliers(this).AgilityLevelMultiplier);
 }
 
 export function gainCharismaExp(this: IPlayer, exp: number): void {
@@ -465,7 +466,7 @@ export function gainCharismaExp(this: IPlayer, exp: number): void {
     this.charisma_exp = 0;
   }
 
-  this.charisma = calculateSkillF(this.charisma_exp, this.charisma_mult * BitNodeMultipliers.CharismaLevelMultiplier);
+  this.charisma = calculateSkillF(this.charisma_exp, this.charisma_mult * getBitNodeMultipliers(this).CharismaLevelMultiplier);
 }
 
 export function gainIntelligenceExp(this: IPlayer, exp: number): void {
@@ -885,7 +886,7 @@ export function startFactionWork(this: IPlayer, faction: Faction): void {
     favorMult = 1;
   }
   this.workRepGainRate *= favorMult;
-  this.workRepGainRate *= BitNodeMultipliers.FactionWorkRepGain;
+  this.workRepGainRate *= getBitNodeMultipliers(this).FactionWorkRepGain;
 
   this.isWorking = true;
   this.workType = CONSTANTS.WorkTypeFaction;
@@ -897,7 +898,7 @@ export function startFactionWork(this: IPlayer, faction: Faction): void {
 export function startFactionHackWork(this: IPlayer, faction: Faction): void {
   this.resetWorkStatus(CONSTANTS.WorkTypeFaction, faction.name, CONSTANTS.FactionWorkHacking);
 
-  this.workHackExpGainRate = 0.15 * this.hacking_exp_mult * BitNodeMultipliers.FactionWorkExpGain;
+  this.workHackExpGainRate = 0.15 * this.hacking_exp_mult * getBitNodeMultipliers(this).FactionWorkExpGain;
   this.workRepGainRate = getHackingWorkRepGain(this, faction);
 
   this.factionWorkType = CONSTANTS.FactionWorkHacking;
@@ -908,13 +909,13 @@ export function startFactionHackWork(this: IPlayer, faction: Faction): void {
 
 export function startFactionFieldWork(this: IPlayer, faction: Faction): void {
   this.resetWorkStatus(CONSTANTS.WorkTypeFaction, faction.name, CONSTANTS.FactionWorkField);
-
-  this.workHackExpGainRate = 0.1 * this.hacking_exp_mult * BitNodeMultipliers.FactionWorkExpGain;
-  this.workStrExpGainRate = 0.1 * this.strength_exp_mult * BitNodeMultipliers.FactionWorkExpGain;
-  this.workDefExpGainRate = 0.1 * this.defense_exp_mult * BitNodeMultipliers.FactionWorkExpGain;
-  this.workDexExpGainRate = 0.1 * this.dexterity_exp_mult * BitNodeMultipliers.FactionWorkExpGain;
-  this.workAgiExpGainRate = 0.1 * this.agility_exp_mult * BitNodeMultipliers.FactionWorkExpGain;
-  this.workChaExpGainRate = 0.1 * this.charisma_exp_mult * BitNodeMultipliers.FactionWorkExpGain;
+  const bitNodeMultipliers = getBitNodeMultipliers(this)
+  this.workHackExpGainRate = 0.1 * this.hacking_exp_mult * bitNodeMultipliers.FactionWorkExpGain;
+  this.workStrExpGainRate = 0.1 * this.strength_exp_mult * bitNodeMultipliers.FactionWorkExpGain;
+  this.workDefExpGainRate = 0.1 * this.defense_exp_mult * bitNodeMultipliers.FactionWorkExpGain;
+  this.workDexExpGainRate = 0.1 * this.dexterity_exp_mult * bitNodeMultipliers.FactionWorkExpGain;
+  this.workAgiExpGainRate = 0.1 * this.agility_exp_mult * bitNodeMultipliers.FactionWorkExpGain;
+  this.workChaExpGainRate = 0.1 * this.charisma_exp_mult * bitNodeMultipliers.FactionWorkExpGain;
   this.workRepGainRate = getFactionFieldWorkRepGain(this, faction);
 
   this.factionWorkType = CONSTANTS.FactionWorkField;
@@ -925,13 +926,13 @@ export function startFactionFieldWork(this: IPlayer, faction: Faction): void {
 
 export function startFactionSecurityWork(this: IPlayer, faction: Faction): void {
   this.resetWorkStatus(CONSTANTS.WorkTypeFaction, faction.name, CONSTANTS.FactionWorkSecurity);
-
-  this.workHackExpGainRate = 0.05 * this.hacking_exp_mult * BitNodeMultipliers.FactionWorkExpGain;
-  this.workStrExpGainRate = 0.15 * this.strength_exp_mult * BitNodeMultipliers.FactionWorkExpGain;
-  this.workDefExpGainRate = 0.15 * this.defense_exp_mult * BitNodeMultipliers.FactionWorkExpGain;
-  this.workDexExpGainRate = 0.15 * this.dexterity_exp_mult * BitNodeMultipliers.FactionWorkExpGain;
-  this.workAgiExpGainRate = 0.15 * this.agility_exp_mult * BitNodeMultipliers.FactionWorkExpGain;
-  this.workChaExpGainRate = 0.0 * this.charisma_exp_mult * BitNodeMultipliers.FactionWorkExpGain;
+  const bitNodeMultipliers = getBitNodeMultipliers(this)
+  this.workHackExpGainRate = 0.05 * this.hacking_exp_mult * bitNodeMultipliers.FactionWorkExpGain;
+  this.workStrExpGainRate = 0.15 * this.strength_exp_mult * bitNodeMultipliers.FactionWorkExpGain;
+  this.workDefExpGainRate = 0.15 * this.defense_exp_mult * bitNodeMultipliers.FactionWorkExpGain;
+  this.workDexExpGainRate = 0.15 * this.dexterity_exp_mult * bitNodeMultipliers.FactionWorkExpGain;
+  this.workAgiExpGainRate = 0.15 * this.agility_exp_mult * bitNodeMultipliers.FactionWorkExpGain;
+  this.workChaExpGainRate = 0.0 * this.charisma_exp_mult * bitNodeMultipliers.FactionWorkExpGain;
   this.workRepGainRate = getFactionSecurityWorkRepGain(this, faction);
 
   this.factionWorkType = CONSTANTS.FactionWorkSecurity;
@@ -961,7 +962,7 @@ export function workForFaction(this: IPlayer, numCycles: number): boolean {
     default:
       break;
   }
-  this.workRepGainRate *= BitNodeMultipliers.FactionWorkRepGain;
+  this.workRepGainRate *= getBitNodeMultipliers(this).FactionWorkRepGain;
 
   //Cap the number of cycles being processed to whatever would put you at limit (20 hours)
   let overMax = false;
@@ -1059,7 +1060,7 @@ export function getWorkMoneyGain(this: IPlayer): number {
     companyPosition.baseSalary *
     company.salaryMultiplier *
     this.work_money_mult *
-    BitNodeMultipliers.CompanyWorkMoney *
+    getBitNodeMultipliers(this).CompanyWorkMoney *
     bn11Mult
   );
 }
@@ -1084,7 +1085,7 @@ export function getWorkHackExpGain(this: IPlayer): number {
     companyPosition.hackingExpGain *
     company.expMultiplier *
     this.hacking_exp_mult *
-    BitNodeMultipliers.CompanyWorkExpGain
+    getBitNodeMultipliers(this).CompanyWorkExpGain
   );
 }
 
@@ -1108,7 +1109,7 @@ export function getWorkStrExpGain(this: IPlayer): number {
     companyPosition.strengthExpGain *
     company.expMultiplier *
     this.strength_exp_mult *
-    BitNodeMultipliers.CompanyWorkExpGain
+    getBitNodeMultipliers(this).CompanyWorkExpGain
   );
 }
 
@@ -1132,7 +1133,7 @@ export function getWorkDefExpGain(this: IPlayer): number {
     companyPosition.defenseExpGain *
     company.expMultiplier *
     this.defense_exp_mult *
-    BitNodeMultipliers.CompanyWorkExpGain
+    getBitNodeMultipliers(this).CompanyWorkExpGain
   );
 }
 
@@ -1156,7 +1157,7 @@ export function getWorkDexExpGain(this: IPlayer): number {
     companyPosition.dexterityExpGain *
     company.expMultiplier *
     this.dexterity_exp_mult *
-    BitNodeMultipliers.CompanyWorkExpGain
+    getBitNodeMultipliers(this).CompanyWorkExpGain
   );
 }
 
@@ -1180,7 +1181,7 @@ export function getWorkAgiExpGain(this: IPlayer): number {
     companyPosition.agilityExpGain *
     company.expMultiplier *
     this.agility_exp_mult *
-    BitNodeMultipliers.CompanyWorkExpGain
+    getBitNodeMultipliers(this).CompanyWorkExpGain
   );
 }
 
@@ -1204,7 +1205,7 @@ export function getWorkChaExpGain(this: IPlayer): number {
     companyPosition.charismaExpGain *
     company.expMultiplier *
     this.charisma_exp_mult *
-    BitNodeMultipliers.CompanyWorkExpGain
+    getBitNodeMultipliers(this).CompanyWorkExpGain
   );
 }
 
@@ -1516,14 +1517,14 @@ export function startCrime(
     this.committingCrimeThruSingFn = true;
     this.singFnCrimeWorkerScript = workerscript;
   }
-
-  this.workHackExpGained = hackExp * this.hacking_exp_mult * BitNodeMultipliers.CrimeExpGain;
-  this.workStrExpGained = strExp * this.strength_exp_mult * BitNodeMultipliers.CrimeExpGain;
-  this.workDefExpGained = defExp * this.defense_exp_mult * BitNodeMultipliers.CrimeExpGain;
-  this.workDexExpGained = dexExp * this.dexterity_exp_mult * BitNodeMultipliers.CrimeExpGain;
-  this.workAgiExpGained = agiExp * this.agility_exp_mult * BitNodeMultipliers.CrimeExpGain;
-  this.workChaExpGained = chaExp * this.charisma_exp_mult * BitNodeMultipliers.CrimeExpGain;
-  this.workMoneyGained = money * this.crime_money_mult * BitNodeMultipliers.CrimeMoney;
+  const bitNodeMultipliers = getBitNodeMultipliers(this)
+  this.workHackExpGained = hackExp * this.hacking_exp_mult * bitNodeMultipliers.CrimeExpGain;
+  this.workStrExpGained = strExp * this.strength_exp_mult * bitNodeMultipliers.CrimeExpGain;
+  this.workDefExpGained = defExp * this.defense_exp_mult * bitNodeMultipliers.CrimeExpGain;
+  this.workDexExpGained = dexExp * this.dexterity_exp_mult * bitNodeMultipliers.CrimeExpGain;
+  this.workAgiExpGained = agiExp * this.agility_exp_mult * bitNodeMultipliers.CrimeExpGain;
+  this.workChaExpGained = chaExp * this.charisma_exp_mult * bitNodeMultipliers.CrimeExpGain;
+  this.workMoneyGained = money * this.crime_money_mult * bitNodeMultipliers.CrimeMoney;
 
   this.timeNeededToCompleteWork = time;
   router.toWork();
@@ -2180,7 +2181,7 @@ export function checkForFactionInvitations(this: IPlayer): Faction[] {
     !daedalusFac.isBanned &&
     !daedalusFac.isMember &&
     !daedalusFac.alreadyInvited &&
-    numAugmentations >= Math.round(30 * BitNodeMultipliers.DaedalusAugsRequirement) &&
+    numAugmentations >= Math.round(30 * getBitNodeMultipliers(this).DaedalusAugsRequirement) &&
     this.money >= 100000000000 &&
     (this.hacking >= 2500 ||
       (this.strength >= 1500 && this.defense >= 1500 && this.dexterity >= 1500 && this.agility >= 1500))
@@ -2683,7 +2684,7 @@ export function gainCodingContractReward(this: IPlayer, reward: ICodingContractR
     }
     case CodingContractRewardType.Money:
     default: {
-      const moneyGain = CONSTANTS.CodingContractBaseMoneyGain * difficulty * BitNodeMultipliers.CodingContractMoney;
+      const moneyGain = CONSTANTS.CodingContractBaseMoneyGain * difficulty * getBitNodeMultipliers(this).CodingContractMoney;
       this.gainMoney(moneyGain, "codingcontract");
       return `Gained ${numeralWrapper.formatMoney(moneyGain)}`;
     }

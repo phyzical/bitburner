@@ -34,7 +34,7 @@ import { HacknetServer } from "../../Hacknet/HacknetServer";
 import { GetServer } from "../../Server/AllServers";
 import { ArcadeRoot } from "../../Arcade/ui/ArcadeRoot";
 import { FactionNames } from "../../Faction/data/FactionNames";
-import { BitNodeMultipliers } from "../../BitNode/BitNodeMultipliers";
+import { getBitNodeMultipliers } from "../../BitNode/BitNodeMultipliers";
 
 type IProps = {
   loc: Location;
@@ -317,7 +317,7 @@ export function SpecialLocation(props: IProps): React.ReactElement {
       return renderGrafting();
     }
     case LocationName.Sector12CityHall: {
-      return (BitNodeMultipliers.CorporationSoftCap < 0.15 && <></>) || <CreateCorporation />;
+      return (getBitNodeMultipliers(player).CorporationSoftCap < 0.15 && <></>) || <CreateCorporation />;
     }
     case LocationName.Sector12NSA: {
       return renderBladeburner();

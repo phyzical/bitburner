@@ -3,7 +3,6 @@ import { CityName } from "./Locations/data/CityNames";
 import { StaticAugmentations } from "./Augmentation/StaticAugmentations";
 import { augmentationExists, initAugmentations } from "./Augmentation/AugmentationHelpers";
 import { AugmentationNames } from "./Augmentation/data/AugmentationNames";
-import { initBitNodeMultipliers } from "./BitNode/BitNode";
 import { Bladeburner } from "./Bladeburner/Bladeburner";
 import { Companies, initCompanies } from "./Company/Companies";
 import { resetIndustryResearchTrees } from "./Corporation/IndustryData";
@@ -36,8 +35,6 @@ const BitNode8StartingMoney = 250e6;
 
 // Prestige by purchasing augmentation
 export function prestigeAugmentation(): void {
-  initBitNodeMultipliers(Player);
-
   const maintainMembership = Player.factions.concat(Player.factionInvitations).filter(function (faction) {
     return Factions[faction].getInfo().keep;
   });
@@ -172,8 +169,6 @@ export function prestigeAugmentation(): void {
 
 // Prestige by destroying Bit Node and gaining a Source File
 export function prestigeSourceFile(flume: boolean): void {
-  initBitNodeMultipliers(Player);
-
   Player.prestigeSourceFile();
   prestigeWorkerScripts(); // Delete all Worker Scripts objects
 

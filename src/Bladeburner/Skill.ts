@@ -1,4 +1,5 @@
-import { BitNodeMultipliers } from "../BitNode/BitNodeMultipliers";
+import { getBitNodeMultipliers } from "../BitNode/BitNodeMultipliers";
+import { Player } from "../Player";
 
 interface ISkillParams {
   name: string;
@@ -134,7 +135,9 @@ export class Skill {
   }
 
   calculateCost(currentLevel: number): number {
-    return Math.floor((this.baseCost + currentLevel * this.costInc) * BitNodeMultipliers.BladeburnerSkillCost);
+    return Math.floor(
+      (this.baseCost + currentLevel * this.costInc) * getBitNodeMultipliers(Player).BladeburnerSkillCost,
+    );
   }
 
   getMultiplier(name: string): number {

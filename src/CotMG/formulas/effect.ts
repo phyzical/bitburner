@@ -1,4 +1,5 @@
-import { BitNodeMultipliers } from "../../BitNode/BitNodeMultipliers";
+import { Player } from "../../Player";
+import { getBitNodeMultipliers } from "../../BitNode/BitNodeMultipliers";
 
 export function CalculateEffect(avgCharge: number, numCharge: number, power: number, boost: number): number {
   return (
@@ -7,6 +8,6 @@ export function CalculateEffect(avgCharge: number, numCharge: number, power: num
       Math.pow((numCharge + 1) / 5, 0.07) *
       power *
       boost *
-      BitNodeMultipliers.StaneksGiftPowerMultiplier
+      getBitNodeMultipliers(Player).StaneksGiftPowerMultiplier
   );
 }

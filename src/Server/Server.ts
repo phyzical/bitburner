@@ -1,11 +1,12 @@
 // Class representing a single hackable Server
 import { BaseServer } from "./BaseServer";
 
-import { BitNodeMultipliers } from "../BitNode/BitNodeMultipliers";
+import { getBitNodeMultipliers } from "../BitNode/BitNodeMultipliers";
 
 import { createRandomString } from "../utils/helpers/createRandomString";
 import { createRandomIp } from "../utils/IPAddress";
 import { Generic_fromJSON, Generic_toJSON, Reviver } from "../utils/JSONReviver";
+import { Player } from "../Player";
 
 export interface IConstructorParams {
   adminRights?: boolean;
@@ -68,15 +69,17 @@ export class Server extends BaseServer {
     //RAM, CPU speed and Scripts
     this.maxRam = params.maxRam != null ? params.maxRam : 0; //GB
 
+    const bitNodeMultipliers = getBitNodeMultipliers(Player);
+
     /* Hacking information (only valid for "foreign" aka non-purchased servers) */
     this.requiredHackingSkill = params.requiredHackingSkill != null ? params.requiredHackingSkill : 1;
     this.moneyAvailable =
-      params.moneyAvailable != null ? params.moneyAvailable * BitNodeMultipliers.ServerStartingMoney : 0;
-    this.moneyMax = 25 * this.moneyAvailable * BitNodeMultipliers.ServerMaxMoney;
+      params.moneyAvailable != null ? params.moneyAvailable * bitNodeMultipliers.ServerStartingMoney : 0;
+    this.moneyMax = 25 * this.moneyAvailable * bitNodeMultipliers.ServerMaxMoney;
 
     //Hack Difficulty is synonymous with server security. Base Difficulty = Starting difficulty
     this.hackDifficulty =
-      params.hackDifficulty != null ? params.hackDifficulty * BitNodeMultipliers.ServerStartingSecurity : 1;
+      params.hackDifficulty != null ? params.hackDifficulty * bitNodeMultipliers.ServerStartingSecurity : 1;
     this.baseDifficulty = this.hackDifficulty;
     this.minDifficulty = Math.max(1, Math.round(this.hackDifficulty / 3));
     this.serverGrowth = params.serverGrowth != null ? params.serverGrowth : 1; //Integer from 0 to 100. Affects money increase from grow()
@@ -145,7 +148,7 @@ export class Server extends BaseServer {
    * Lowers the server's security level (difficulty) by the specified amount)
    */
   weaken(amt: number): void {
-    this.hackDifficulty -= amt * BitNodeMultipliers.ServerWeakenRate;
+    this.hackDifficulty -= amt * getBitNodeMultipliers(Player).ServerWeakenRate;
     this.capDifficulty();
   }
 

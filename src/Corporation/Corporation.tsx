@@ -5,7 +5,7 @@ import { Warehouse } from "./Warehouse";
 import { CorporationConstants } from "./data/Constants";
 import { Industry } from "./Industry";
 
-import { BitNodeMultipliers } from "../BitNode/BitNodeMultipliers";
+import { getBitNodeMultipliers } from "../BitNode/BitNodeMultipliers";
 import { showLiterature } from "../Literature/LiteratureHelpers";
 import { LiteratureNames } from "../Literature/data/LiteratureNames";
 import { IPlayer } from "../PersonObjects/IPlayer";
@@ -13,6 +13,7 @@ import { IPlayer } from "../PersonObjects/IPlayer";
 import { dialogBoxCreate } from "../ui/React/DialogBox";
 import { Reviver, Generic_toJSON, Generic_fromJSON } from "../utils/JSONReviver";
 import { isString } from "../utils/helpers/isString";
+import { Player } from "../Player";
 
 interface IParams {
   name?: string;
@@ -74,7 +75,7 @@ export class Corporation {
     this.storedCycles += numCycles;
   }
 
-  process(player: IPlayer): void {
+  process(): void {
     if (this.storedCycles >= CorporationConstants.CyclesPerIndustryStateCycle) {
       const state = this.getState();
       const marketCycles = 1;
@@ -132,7 +133,7 @@ export class Corporation {
           } else {
             const totalDividends = (this.dividendPercentage / 100) * cycleProfit;
             const retainedEarnings = cycleProfit - totalDividends;
-            player.gainMoney(this.getDividends(), "corporation");
+            Player.gainMoney(this.getDividends(), "corporation");
             this.addFunds(retainedEarnings);
           }
         } else {
@@ -159,7 +160,7 @@ export class Corporation {
     if (this.unlockUpgrades[6] === 1) {
       upgrades += 0.1;
     }
-    return Math.pow(dividends, BitNodeMultipliers.CorporationSoftCap + upgrades);
+    return Math.pow(dividends, getBitNodeMultipliers(Player).CorporationSoftCap + upgrades);
   }
 
   determineValuation(): number {
@@ -184,7 +185,7 @@ export class Corporation {
       }
       val -= val % 1e6; //Round down to nearest millionth
     }
-    return val * BitNodeMultipliers.CorporationValuation;
+    return val * getBitNodeMultipliers(Player).CorporationValuation;
   }
 
   getTargetSharePrice(): number {

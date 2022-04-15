@@ -3,7 +3,7 @@ import { Server, IConstructorParams } from "./Server";
 import { BaseServer } from "./BaseServer";
 import { calculateServerGrowth } from "./formulas/grow";
 
-import { BitNodeMultipliers } from "../BitNode/BitNodeMultipliers";
+import { getBitNodeMultipliers } from "../BitNode/BitNodeMultipliers";
 import { CONSTANTS } from "../Constants";
 import { IPlayer } from "../PersonObjects/IPlayer";
 import { Programs } from "../Programs/Programs";
@@ -60,7 +60,7 @@ export function numCycleForGrowth(server: Server, growth: number, p: IPlayer, co
     (Math.log(ajdGrowthRate) *
       p.hacking_grow_mult *
       serverGrowthPercentage *
-      BitNodeMultipliers.ServerGrowthRate *
+      getBitNodeMultipliers(p).ServerGrowthRate *
       coreBonus);
 
   return cycles;
@@ -130,7 +130,7 @@ export function numCycleForGrowthCorrected(
   const serverGrowthPercentage = server.serverGrowth / 100.0;
   const coreMultiplier = 1 + (cores - 1) / 16;
   const threadMultiplier =
-    serverGrowthPercentage * p.hacking_grow_mult * coreMultiplier * BitNodeMultipliers.ServerGrowthRate;
+    serverGrowthPercentage * p.hacking_grow_mult * coreMultiplier * getBitNodeMultipliers(p).ServerGrowthRate;
 
   /* To understand what is done below we need to do some math. I hope the explanation is clear enough.
    * First of, the names will be shortened for ease of manipulation:
