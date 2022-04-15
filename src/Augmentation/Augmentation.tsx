@@ -605,7 +605,7 @@ export class Augmentation {
     const augmentationReference = StaticAugmentations[this.name];
     let moneyCost = augmentationReference.baseCost;
     let repCost = augmentationReference.baseRepRequirement;
-    const bitNodeMultipliers = getBitNodeMultipliers(player)
+    const bitNodeMultipliers = getBitNodeMultipliers(player);
 
     if (augmentationReference.name === AugmentationNames.NeuroFluxGovernor) {
       let nextLevel = this.getLevel(player);
