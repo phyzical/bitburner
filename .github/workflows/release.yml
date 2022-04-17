@@ -3,7 +3,9 @@ name: Release
 on:
   workflow_run:
     workflows: ["CI"]
-    push: tags
+    push:
+      tags:
+        - "*"
     branches: [dev]
     types:
       - completed
