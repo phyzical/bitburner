@@ -11,12 +11,11 @@ on:
       - completed
 jobs:
   release:
-    # if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    ## todo test this works for both flows
+    if: ${{ github.event.workflow_run.conclusion == 'success' }} || ${{ github.event.workflow_run.conclusion == false }}
     name: Build, release and push artifacts
     runs-on: ubuntu-latest
     steps:
-      - name: blah "${{ github.event.workflow_run.conclusion == 'success' }}""
-        run: echo
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
@@ -71,13 +70,15 @@ jobs:
           path: |
             .build/bitburner-linux-x64/
           retention-days: 10
+      # - name: Deploy docs
+      ## TODO
       - name: Deploy web app
         if: contains(github.ref, 'tags') ## only deploy web app for tags
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages # The branch the action should deploy to.
           folder: dist # The folder the action should deploy.
-      ## for when we have perms to add permissions to handle steam deploy also
+      ## for when we have perms to add secrets to handle steam deploy also
       # - uses: game-ci/steam-deploy@v1
       #   with:
       #     username: ${{ secrets.STEAM_USERNAME }}
