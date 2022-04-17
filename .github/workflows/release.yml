@@ -3,9 +3,9 @@ name: Release
 on:
   workflow_run:
     workflows: ["CI"]
-    tags:
-      - "*"
-    branches: [dev]
+    branches:
+      - dev
+      - "*tag/*"
     types:
       - completed
 jobs:
@@ -45,28 +45,28 @@ jobs:
           name: web-${{ steps.version.outputs.VERSION }}.${{ steps.version.outputs.SHA_SHORT }}
           path: |
             dist/
-          retention-days: 90
+          retention-days: 10
       - name: Upload Win build
         uses: actions/upload-artifact@v3
         with:
           name: win-${{ steps.version.outputs.VERSION }}.${{ steps.version.outputs.SHA_SHORT }}
           path: |
             .build/bitburner-win32-x64/
-          retention-days: 90
+          retention-days: 10
       - name: Upload Mac build
         uses: actions/upload-artifact@v3
         with:
           name: mac-${{ steps.version.outputs.VERSION }}.${{ steps.version.outputs.SHA_SHORT }}
           path: |
             .build/bitburner-darwin-x64/
-          retention-days: 90
+          retention-days: 10
       - name: Upload Linux build
         uses: actions/upload-artifact@v3
         with:
           name: linux-${{ steps.version.outputs.VERSION }}.${{ steps.version.outputs.SHA_SHORT }}
           path: |
             .build/bitburner-linux-x64/
-          retention-days: 90
+          retention-days: 10
       - name: Deploy web app
         if: contains(github.ref, 'tags') ## only deploy web app for tags
         uses: JamesIves/github-pages-deploy-action@v4
