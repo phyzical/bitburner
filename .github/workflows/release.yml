@@ -4,7 +4,7 @@ on:
   push:
     tags:
       - "*"
-    branches: [dev phyzical/*]
+    branches: [dev]
 jobs:
   release:
     name: Bump Version
