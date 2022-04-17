@@ -10,7 +10,7 @@ on:
       - completed
 jobs:
   release:
-    name: Bump Version
+    name: Build, release and push artifacts
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
