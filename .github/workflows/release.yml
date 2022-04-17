@@ -1,19 +1,22 @@
 name: Release
 
 on:
+  push:
+    tags:
+      - "*"
   workflow_run:
     workflows: ["CI"]
-    push:
-      tags:
-        - "*"
     branches: [dev]
     types:
       - completed
 jobs:
   release:
+    # if: ${{ github.event.workflow_run.conclusion == 'success' }}
     name: Build, release and push artifacts
     runs-on: ubuntu-latest
     steps:
+      - name: blah "${{ github.event.workflow_run.conclusion == 'success' }}""
+        run: echo
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
