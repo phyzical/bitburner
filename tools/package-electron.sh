@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 
-set -eux pipefail
+set -euxo pipefail
 
 # Clear out any files remaining from old builds
 rm -rf .package
