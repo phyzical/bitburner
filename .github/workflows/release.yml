@@ -21,6 +21,7 @@ jobs:
         id: version
         run: |
           echo ::set-output name=VERSION::${GITHUB_REF#refs/*/}
+          echo "::set-output name=SHA_SHORT::$(git rev-parse --short HEAD)"
       - name: Use Node.js 16.13.1
         uses: actions/setup-node@v2
         with:
@@ -38,13 +39,33 @@ jobs:
         run: . tools/package-electron.sh mac
       - name: Build Linux Electron App
         run: . tools/package-electron.sh linux
-      - name: Upload builds
+      - name: Upload Web build
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ steps.version.outputs.VERSION }}
+          name: web-${{ steps.version.outputs.VERSION }}.${{ steps.version.outputs.SHA_SHORT }}
           path: |
             dist/
-            .build/
+          retention-days: 90
+      - name: Upload Win build
+        uses: actions/upload-artifact@v3
+        with:
+          name: win-${{ steps.version.outputs.VERSION }}.${{ steps.version.outputs.SHA_SHORT }}
+          path: |
+            .build/bitburner-win32-x64/
+          retention-days: 90
+      - name: Upload Mac build
+        uses: actions/upload-artifact@v3
+        with:
+          name: mac-${{ steps.version.outputs.VERSION }}.${{ steps.version.outputs.SHA_SHORT }}
+          path: |
+            .build/bitburner-darwin-x64/
+          retention-days: 90
+      - name: Upload Linux build
+        uses: actions/upload-artifact@v3
+        with:
+          name: linux-${{ steps.version.outputs.VERSION }}.${{ steps.version.outputs.SHA_SHORT }}
+          path: |
+            .build/bitburner-linux-x64/
           retention-days: 90
       - name: Deploy web app
         if: contains(github.ref, 'tags') ## only deploy web app for tags
