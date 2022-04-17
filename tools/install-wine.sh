@@ -1,10 +1,6 @@
 #!/bin/bash
 
 sudo dpkg --add-architecture i386
+sudo apt update
 
-wget -qO- https://dl.winehq.org/wine-builds/winehq.key | sudo apt-key add -
-
-sudo apt-add-repository "deb http://dl.winehq.org/wine-builds/ubuntu/ $(lsb_release -cs) main"
-sudo apt-get update
-
-sudo apt-get install -y --install-recommends wine-stable-i386 wine-stable winehq-stable
+sudo apt install wine64 wine32
