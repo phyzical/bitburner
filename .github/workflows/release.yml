@@ -46,7 +46,8 @@ jobs:
           name: ${{ steps.version.outputs.VERSION }}
           path: |
             dist/
-            builds/
+            .build/
+          retention-days: 90
       ## for when we have perms to add permissions to handle steam deploy also
       # - uses: game-ci/steam-deploy@v1
       #   with:
