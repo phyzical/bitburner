@@ -30,16 +30,14 @@ jobs:
         run: npm install
       - name: Build Web App
         run: npm run build
-      - name: Deploy web app
-        if: contains(github.ref, 'tags') ## only deploy web app for tags
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: gh-pages # The branch the action should deploy to.
-          folder: dist # The folder the action should deploy.
       - name: install wine
         run: . tools/install-wine.sh
-      - name: Build Electron App
-        run: npm run electron
+      - name: Build Win Electron App
+        run: . tools/package-electron.sh win
+      - name: Build Mac Electron App
+        run: . tools/package-electron.sh mac
+      - name: Build Linux Electron App
+        run: . tools/package-electron.sh linux
       - name: Upload builds
         uses: actions/upload-artifact@v3
         with:
@@ -48,6 +46,12 @@ jobs:
             dist/
             .build/
           retention-days: 90
+      - name: Deploy web app
+        if: contains(github.ref, 'tags') ## only deploy web app for tags
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages # The branch the action should deploy to.
+          folder: dist # The folder the action should deploy.
       ## for when we have perms to add permissions to handle steam deploy also
       # - uses: game-ci/steam-deploy@v1
       #   with:
