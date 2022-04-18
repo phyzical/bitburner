@@ -44,9 +44,11 @@ jobs:
       - name: Zip up files
         run: |
           zip -r dist dist
-          cd .build && zip -r win bitburner-win32-x64/*
-          cd .build && zip -r linux bitburner-linux-x64/*
-          cd .build && zip -r mac bitburner-darwin-x64/*
+          cd .build
+          zip -r win bitburner-win32-x64/*
+          zip -r linux bitburner-linux-x64/*
+          zip -r mac bitburner-darwin-x64/*
+          cd ..
       - name: Upload Web build artifact
         if: contains(github.ref, 'dev')
         uses: actions/upload-artifact@v3
@@ -59,21 +61,21 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: win-${{ steps.version.outputs.VERSION }}.${{ steps.version.outputs.SHA_SHORT }}
-          path: win.zip
+          path: .build/win.zip
           retention-days: 10
       - name: Upload Mac build artifact
         if: contains(github.ref, 'dev')
         uses: actions/upload-artifact@v3
         with:
           name: mac-${{ steps.version.outputs.VERSION }}.${{ steps.version.outputs.SHA_SHORT }}
-          path: mac.zip
+          path: .build/mac.zip
           retention-days: 10
       - name: Upload Linux build artifact
         if: contains(github.ref, 'dev')
         uses: actions/upload-artifact@v3
         with:
           name: linux-${{ steps.version.outputs.VERSION }}.${{ steps.version.outputs.SHA_SHORT }}
-          path: linux.zip
+          path: .build/linux.zip
           retention-days: 10
       # - name: Deploy docs
       ## TODO
@@ -90,7 +92,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ github.event.outputs.upload_url }}
-          asset_path: ./dist.zip
+          asset_path: .build/dist.zip
           asset_name: web-${{ steps.version.outputs.VERSION }}.${{ steps.version.outputs.SHA_SHORT }}.zip
           asset_content_type: application/zip
       - name: Upload Win Release Asset
@@ -100,7 +102,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ github.event.outputs.upload_url }}
-          asset_path: ./win.zip
+          asset_path: .build/win.zip
           asset_name: win-${{ steps.version.outputs.VERSION }}.${{ steps.version.outputs.SHA_SHORT }}.zip
           asset_content_type: application/zip
       - name: Upload Mac Release Asset
@@ -110,7 +112,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ github.event.outputs.upload_url }}
-          asset_path: ./mac.zip
+          asset_path: .build/mac.zip
           asset_name: mac-${{ steps.version.outputs.VERSION }}.${{ steps.version.outputs.SHA_SHORT }}.zip
           asset_content_type: application/zip
       - name: Upload linux Release Asset
