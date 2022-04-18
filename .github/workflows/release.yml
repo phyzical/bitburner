@@ -45,9 +45,9 @@ jobs:
         run: |
           zip -r dist dist
           cd .build
-          zip -r win bitburner-win32-x64
-          zip -r linux bitburner-linux-x64
-          zip -r mac bitburner-darwin-x64
+          zip -r win bitburner-win32-x64/*
+          zip -r linux bitburner-linux-x64/*
+          zip -r mac bitburner-darwin-x64/*
       - name: Upload Web build artifact
         if: contains(github.ref, 'dev')
         uses: actions/upload-artifact@v3
