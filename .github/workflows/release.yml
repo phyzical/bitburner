@@ -43,10 +43,10 @@ jobs:
         run: . tools/package-electron.sh linux
       - name: Zip up files
         run: |
-          zip -r dist dist
-          zip -r win .build/bitburner-win32-x64
-          zip -r linux .build/bitburner-linux-x64
-          zip -r mac .build/bitburner-darwin-x64
+          zip -r -j dist dist
+          zip -r -j win .build/bitburner-win32-x64
+          zip -r -j linux .build/bitburner-linux-x64
+          zip -r -j mac .build/bitburner-darwin-x64
       - name: Upload Web build artifact
         if: contains(github.ref, 'dev')
         uses: actions/upload-artifact@v3
