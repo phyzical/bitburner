@@ -1,9 +1,9 @@
 name: Release
 
 on:
-  push:
-    tags:
-      - "*"
+  release:
+    types:
+      - published
   workflow_run:
     workflows: ["CI"]
     branches: [dev]
@@ -11,7 +11,6 @@ on:
       - completed
 jobs:
   release:
-    ## todo test this works for both flows
     if: ${{ github.event.workflow_run.conclusion == 'success' }} || ${{ github.event.workflow_run.conclusion == false }}
     name: Build, release and push artifacts
     runs-on: ubuntu-latest
@@ -42,42 +41,88 @@ jobs:
         run: . tools/package-electron.sh mac
       - name: Build Linux Electron App
         run: . tools/package-electron.sh linux
-      - name: Upload Web build
+      - name: Zip up files
+        run: |
+          zip dist dist/
+          zip win .build/bitburner-win32-x64/
+          zip linux .build/bitburner-linux-x64/
+          zip mac .build/bitburner-darwin-x64/
+      - name: Upload Web build artifact
+        if: contains(github.ref, 'dev')
         uses: actions/upload-artifact@v3
         with:
           name: web-${{ steps.version.outputs.VERSION }}.${{ steps.version.outputs.SHA_SHORT }}
-          path: |
-            dist/
+          path: dist.zip
           retention-days: 10
-      - name: Upload Win build
+      - name: Upload Win build artifact
+        if: contains(github.ref, 'dev')
         uses: actions/upload-artifact@v3
         with:
           name: win-${{ steps.version.outputs.VERSION }}.${{ steps.version.outputs.SHA_SHORT }}
-          path: |
-            .build/bitburner-win32-x64/
+          path: win.zip
           retention-days: 10
-      - name: Upload Mac build
+      - name: Upload Mac build artifact
+        if: contains(github.ref, 'dev')
         uses: actions/upload-artifact@v3
         with:
           name: mac-${{ steps.version.outputs.VERSION }}.${{ steps.version.outputs.SHA_SHORT }}
-          path: |
-            .build/bitburner-darwin-x64/
+          path: mac.zip
           retention-days: 10
-      - name: Upload Linux build
+      - name: Upload Linux build artifact
+        if: contains(github.ref, 'dev')
         uses: actions/upload-artifact@v3
         with:
           name: linux-${{ steps.version.outputs.VERSION }}.${{ steps.version.outputs.SHA_SHORT }}
-          path: |
-            .build/bitburner-linux-x64/
+          path: linux.zip
           retention-days: 10
       # - name: Deploy docs
       ## TODO
       - name: Deploy web app
-        if: contains(github.ref, 'tags') ## only deploy web app for tags
+        if: ${{ !contains(github.ref, 'dev') }}
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages # The branch the action should deploy to.
           folder: dist # The folder the action should deploy.
+      - name: Upload Web Release Asset
+        uses: actions/upload-release-asset@v1
+        if: ${{ !contains(github.ref, 'dev') }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.outputs.upload_url }}
+          asset_path: ./dist.zip
+          asset_name: web-${{ steps.version.outputs.VERSION }}.${{ steps.version.outputs.SHA_SHORT }}.zip
+          asset_content_type: application/zip
+      - name: Upload Win Release Asset
+        uses: actions/upload-release-asset@v1
+        if: ${{ !contains(github.ref, 'dev') }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.outputs.upload_url }}
+          asset_path: ./win.zip
+          asset_name: win-${{ steps.version.outputs.VERSION }}.${{ steps.version.outputs.SHA_SHORT }}.zip
+          asset_content_type: application/zip
+      - name: Upload Mac Release Asset
+        uses: actions/upload-release-asset@v1
+        if: ${{ !contains(github.ref, 'dev') }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.outputs.upload_url }}
+          asset_path: ./mac.zip
+          asset_name: mac-${{ steps.version.outputs.VERSION }}.${{ steps.version.outputs.SHA_SHORT }}.zip
+          asset_content_type: application/zip
+      - name: Upload linux Release Asset
+        uses: actions/upload-release-asset@v1
+        if: ${{ !contains(github.ref, 'dev') }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.outputs.upload_url }}
+          asset_path: ./linux.zip
+          asset_name: linux-${{ steps.version.outputs.VERSION }}.${{ steps.version.outputs.SHA_SHORT }}.zip
+          asset_content_type: application/zip
       ## for when we have perms to add secrets to handle steam deploy also
       # - uses: game-ci/steam-deploy@v1
       #   with:
