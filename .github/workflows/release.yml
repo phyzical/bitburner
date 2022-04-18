@@ -128,7 +128,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.get_release.outputs.upload_url }}
-          asset_path: ./linux.zip
+          asset_path: .build/linux.zip
           asset_name: linux-${{ steps.version.outputs.VERSION }}.${{ steps.version.outputs.SHA_SHORT }}.zip
           asset_content_type: application/zip
       ## for when we have perms to add secrets to handle steam deploy also
